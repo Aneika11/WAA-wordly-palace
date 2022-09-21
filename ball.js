@@ -1,18 +1,18 @@
 // gets the canvas element
-const canvas = document.querySelector('canvas');
+const canvasHere = document.querySelector('canvas');
 
 // gets the width and height of browser viewport
-const width = window.innerWidth;
-const height = window.innerHeight;
+const width = window.innerWidth-20;
+const height = window.innerHeight-20;
 
 //   set the width and height of canvas equal to browser viewport
-canvas.width = width;
-canvas.height = height;
+canvasHere.width = width;
+canvasHere.height = height;
 
 //   call the getContext method to draw 2d shape
-const ctx = canvas.getContext('2d');
-let elemLeft = ctx.offsetLeft + ctx.clientLeft;
-let elemTop = ctx.offsetTop + ctx.clientTop;
+const ctx = canvasHere.getContext('2d');
+// let elemLeft = ctx.offsetLeft + ctx.clientLeft;
+// let elemTop = ctx.offsetTop + ctx.clientTop;
 // create Ball class
 class Ball {
     constructor(x, y, velx, vely, size, color,textTOadd ,id) {
@@ -68,32 +68,48 @@ function random(min, max) {
 //   create some balls and store in an array
 const balls = [];
 let ballnumber = 0;
-while (ballnumber < 20) {
-    let words = ['aldair was here and', 'cat', 'cat', 'vat man was here ha ha']
-    // create a new instance of Ball class
-    // now replace static number with random number
-    let size = 0;
-    for (let i = 0; i < words[0].length; i++) { 
-        if (i < 4) {
-            size += 7
-        } else {
-            size += 5
-        }
-    }
+for (let i = 0; i < 20;i++){
+    let word;
+    // api here
+    fetch("https://api.api-ninjas.com/v1/randomword/?key=puHp1RTi4iddWO3YYmNuXQ==lTdWygeqoi5P3jQz").then(res => res.json()).then(data => {
+        word = data.word
+        let size = 0;
+        
+        setTimeout(() => {
+            console.log(word)
+            for (let i = 0; i < word.length; i++) {
+                if (i < 4) {
+                    size += 7.75
+                } else {
+                    size += 5.5
+                }
+            }
+            let xspeed = random(size, width - size);
+            let yspeed = random(size, height - size);
 
-    const ball = new Ball(
-        random(size, width - size),
-        random(size, height - size),
-        random(-2, 2),
-        random(-2, 2),
-        // 0,0,
-        size,
-        `rgb(${random(0, 255)}, ${random(0, 255)}, ${random(0, 255)})`,
-        words[1],
-        ballnumber
-    );
-    balls.push(ball);
-    ballnumber++
+            while (xspeed === 0) {
+                xspeed = random(size, width - size);
+            }
+            while (yspeed === 0) {
+                yspeed = random(size, height - size);
+            }
+            const ball = new Ball(
+                random(size, width - size),
+                random(size, height - size),
+                random(-2, 2),
+                random(-2, 2),
+                // 0,0,
+                size,
+                `rgb(${random(100, 255)}, ${random(100, 255)}, ${random(100, 255)})`,
+                word,
+                ballnumber
+            );
+            balls.push(ball);
+            ballnumber++
+        }, 1000)
+    })
+
+    //
 }
 
 //   create loop func
@@ -115,17 +131,18 @@ function loop() {
 
 // finaly call the loop func once ot start
 loop();
-ctx.addEventListener('click', function (event) {
-    let x = event.pageX - elemLeft;
-    let y = event.pageY - elemTop;
-
+canvasHere.addEventListener('click', function (event) {
+    let x = event.layerX ;
+    let y = event.layerY -28;
+    // console.log(event)
     // Collision detection between clicked offset and element.
     balls.forEach( (element)=> {
-        if (y > element.top && y < element.top + element.height
-            && x > element.left && x < element.left + element.width) {
-            console.log(element)
+        if (x > (element.x - 68) && x < (element.x + 68) && y > (element.y - 68) && y < (element.y + 68)) {
+            // word
+            console.log(element.textTOadd)
         }
     });
-    console.log('joiasjdios')
+    balls[0].textTOadd = "noijo"
+    //console.log(balls[0],x,y,balls[0].size)
 
 }, false);
