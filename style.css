@@ -4,6 +4,7 @@ body{
   background-image: url(https://wallpapercave.com/wp/igxNOHD.jpg);
     font-family: Georgia, serif;
 }
+
 #arrayOfWords{
     display: grid;
     justify-content: center;
