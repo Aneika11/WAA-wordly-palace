@@ -387,7 +387,7 @@ canvasHere.addEventListener('click', function (event) {
                         meaning.innerText = `Meaning: ${element.savedDefinition} `
                         example.innerText = `Pronunciation: ${element.savedPronounciation}`
                         audio.innerText = "Audio"
-    
+                        audio.style.display = "block"
                         discription.style.cssText = `backdrop-filter: blur(16px);
                         background-color: rgba(17,25,40,0.75);
                         border-radius: 12px;
