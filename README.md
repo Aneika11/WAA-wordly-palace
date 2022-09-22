@@ -1,4 +1,4 @@
-#WAA-wordly-palace
+WAA-wordly-palace
 
 Team:
 
