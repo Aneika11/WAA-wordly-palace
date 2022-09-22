@@ -4,6 +4,7 @@ body{
   /* background-image: url(https://wallpapercave.com/wp/igxNOHD.jpg); */
     font-family: Georgia, serif;
     background-color: black;
+
 }
 
 #arrayOfWords{
@@ -67,3 +68,20 @@ body{
         background-image: linear-gradient(to bottom right, orange, green);
     }
 }
+#ex-holder{
+   display: inline-flex; 
+
+}
+#audio-btn{
+    width: 60px;
+    height: 20px;
+    margin-top: 40px;
+    margin-left: 50px;
+    
+
+}
+
+/* #discription{
+    backdrop-filter: blur(16px);
+
+} */
