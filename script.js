@@ -8,6 +8,17 @@ window.addEventListener("DOMContentLoaded", () => {
             // console.log(data)
 
 
+
+
+            let randomW = document.createElement("button")
+            arrayOfW.appendChild(randomW)
+            randomW.innerText = `${data.word}`
+            randomW.style.marginTop = `${Math.random() * 10}px`
+            randomW.style.marginLeft = `${Math.random() * 10}px`
+            randomW.style.borderRadius = "70px";
+            randomW.style.height = "50px"
+            randomW.style.boxShadow = "inset 0 0 10px #000000"
+
         })
     }
 }

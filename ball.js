@@ -68,7 +68,7 @@ function random(min, max) {
 //   create some balls and store in an array
 const balls = [];
 let ballnumber = 0;
-for (let i = 0; i < 20;i++){
+for (let i = 0; i < 25;i++){
     let word;
     // api here
     fetch("https://api.api-ninjas.com/v1/randomword/?key=puHp1RTi4iddWO3YYmNuXQ==lTdWygeqoi5P3jQz").then(res => res.json()).then(data => {
@@ -136,12 +136,21 @@ canvasHere.addEventListener('click', function (event) {
     let y = event.layerY -28;
     // console.log(event)
     // Collision detection between clicked offset and element.
+    let wordToSearch;
     balls.forEach( (element)=> {
+        element.fillStyle = 'blue';
+        
         if (x > (element.x - 68) && x < (element.x + 68) && y > (element.y - 68) && y < (element.y + 68)) {
             // word
             console.log(element.textTOadd)
-        }
-    });
+            fetch(`https://api.dictionaryapi.dev/api/v2/entries/en/${element.textTOadd}`)
+                  .then(res => res.json()).then(data2 => {
+                    console.log(data2)
+                  })
+            }
+    })
+
+    
     balls[0].textTOadd = "noijo"
     //console.log(balls[0],x,y,balls[0].size)
 

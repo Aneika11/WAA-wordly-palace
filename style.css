@@ -1,25 +1,69 @@
 body{
     margin: 0px;
     padding:0px;
-  background-image: url(https://wallpapercave.com/wp/igxNOHD.jpg);
+  /* background-image: url(https://wallpapercave.com/wp/igxNOHD.jpg); */
     font-family: Georgia, serif;
+    background-color: black;
 }
 
 #arrayOfWords{
     display: grid;
     justify-content: center;
     grid-template-columns: repeat(4,auto);
-    /* border: 5px solid black; */
-    margin-top: 100px;
+    /* margin-top: 100px; */
     background-color: white #D5B87C;
     grid-gap: 70px;
-    padding: 50px;
+    padding: 20px;
 }
-h3{
-    background-color: white;
+
+#container{
     max-width: 700px;
     margin: auto;
     text-align: center;
-    height: 40px;
+    height: 80px;
+    -webkit-backdrop-filter: blur(20px);
+    backdrop-filter: blur(20px);
+    position: absolute;
+    margin-top: 0px;
+    left: 0;
+    right: 0;
+    top: 0;
+    bottom: 0;
+    border-radius: 8px;
+    -webkit-box-shadow: 20px 20px 22px rgba(0,0,0,0.2);
+    box-shadow: 20px 20px 22px rgba(0,0,0,0.2);
+    font-family: 'Poppins',sans-serif;
+    
+}
 
+#box-content{
+    color: white;
+    font-size: xx-large;
+    position:absolute;
+    left: 0;
+    right: 0;
+    top: 0;
+    bottom: 0;
+    z-index: 10;
+}
+
+#background{
+    max-width: 700px;
+    margin: auto;
+    text-align: center;
+    height: 80px;
+    opacity: .5;
+    background-image: linear-gradient(to bottom right, red, yellow);
+    -webkit-backdrop-filter: blur(20px);
+    animation: backgroundChange 3s linear infinite alternate;
+}
+
+
+@keyframes backgroundChange{
+    from{
+        background-image: linear-gradient(to bottom right, red, yellow);
+    }
+    to{
+        background-image: linear-gradient(to bottom right, orange, green);
+    }
 }
