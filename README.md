@@ -1,6 +1,6 @@
 #WAA-wordly-palace
 
-**Team**:
+Team:
 
 * Product Manager: Aneika Nanton
 * Developer: Aldair Garcia
