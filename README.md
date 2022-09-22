@@ -18,7 +18,7 @@ Unit 6: Skills:
 
 Product Vision:
 
-* Movie Mood is a web platform that allows users learn new words. This works by suggesting random daily words which are displayed in floating balls on the screen.When the words are clicked, the definition and pronunciation for that particular word is displayed. The user can also translate the page to see what the same word would look like in different languages.
+* WAA(words are awesome) is a web platform that allows users learn new words. This works by suggesting random daily words which are displayed in floating balls on the screen.When the words are clicked, the definition and pronunciation for that particular word is displayed. The user can also translate the page to see what the same word would look like in different languages.
 
 MVP:
 
