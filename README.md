@@ -26,6 +26,15 @@ MVP:
 Broaden Vocabulary, Improvements in the sophistication of speech learn the recommended word
 Pop up that tells the history and interesting facts about the word suggested
 
+Demo
+
+(https://user-images.githubusercontent.com/93327533/191820990-8cc49725-006c-403f-9e63-9dbc3fe040f5.gif)
+
+
+
+
+
+
 Contact:
 
 Developer: Wayne March
