@@ -8,13 +8,45 @@
     <link rel="stylesheet" href="style.css">
 </head>
 <body>
+    <nav id="nav">
+        <h1>WAA</h1>
+        <div id="account-log">
+            <p id="UserName"></p>
+            <p id="Login">Login</p>
+            <p id="SignUp">SignUp</p>
+            <p id="SignOut">SignOut</p>
+        </div>
+    </nav>
     <h3>Choose your word!!</h3>
+    <div id="sign-in-form-div">
+        <p id="signin-allert"></p>
+        <form id="sign-in-form">
+            <label for="fname">User name:</label>
+            <input type="text" name="fname" class="geting-user-data">
+            <br>
+            <label for="userpassword">password:</label>
+            <input type="password" name="userpassword" class="geting-user-data">
+            <br>
+            <input type="submit">
+            <br>
+        </form>
+    </div>
+    <div id="sign-up-form-div">
+        <p id="signup-allert">asd</p>
+        <form id="sign-up-form">
+            <label for="fname">User name:</label>
+            <input type="text" name="fname" class="geting-user-data">
+            <br>
+            <label for="userpassword">password:</label>
+            <input type="password" name="userpassword" class="geting-user-data">
+            <br>
+            <input type="submit">
+            <br>
+        </form>
+    </div>
     <!-- <div id="arrayOfWords"></div> -->
-   
-<canvas></canvas>
-
-
+    <canvas></canvas>
     <!-- <script src="script.js"></script> -->
-    <script src="ball.js"></script>
+    <script type="module" src="ball.js"></script>
 </body>
 </html>

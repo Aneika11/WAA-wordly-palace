@@ -1,3 +1,186 @@
+import { initializeApp } from "https://www.gstatic.com/firebasejs/9.9.3/firebase-app.js";
+import { getDatabase, onValue, ref, set } from "https://www.gstatic.com/firebasejs/9.9.3/firebase-database.js";
+
+//account batabase
+const firebaseConfig = {
+    apiKey: "AIzaSyDUExCTxTDwGP2V9sRnXZMc4T7qYs_dnsM",
+    authDomain: "webschool-8b1b8.firebaseapp.com",
+    databaseURL: "https://webschool-8b1b8.firebaseio.com",
+    projectId: "webschool-8b1b8",
+    storageBucket: "webschool-8b1b8.appspot.com",
+    messagingSenderId: "39115618234",
+    appId: "1:39115618234:web:571207b2d86e3774d7cf83"
+};
+
+let app = initializeApp(firebaseConfig);
+let db = getDatabase();
+
+let serverData = {
+    wordOfTheDay: '',
+    isLogedIn: false,
+    accountData: null,
+    accountReference: null,
+    accountName: null,
+    doesAccountExsist(userName, getpassword) {
+        this.accountReference = ref(db, `accounts/${userName}`);
+        onValue(this.accountReference, (snap) => {
+            //console.log(snap.val())
+            if (snap.val()) {
+                if (getpassword === snap.val().password) {
+                    this.isLogedIn = true
+                } else {
+                    this.isLogedIn = 'wrong password';
+                }
+            } else {
+                this.isLogedIn = 'invaled Username';
+            }
+        });
+            //console.log(returnThisAccount)
+    },
+    getAccountData(userName, password) {
+        onValue(this.accountReference, (snap) => {
+            this.accountData = snap.val()
+            console.log(snap.val());
+        });
+        this.isLogedIn = true;
+        console.log(this.accountData);
+        localStorage.setItem("username", this.accountData.name);
+        return 'successfully logged in'
+    },
+    creatAccount(userName, password, confirmpassword) {
+        this.accountReference = ref(db, `accounts/${userName}`);
+        onValue(this.accountReference, (snap) => {
+            if (snap.val()) {
+                return false
+                // console.log(snap.val())
+            } else {
+                if (password === confirmpassword) {
+                    this.isLogedIn = true;
+                    set(this.accountReference, {
+                        password: password,
+                        name: userName,
+                        lookedupwords: {
+                            0: "irony",
+                            1: true,
+                            2: false,
+                        }
+                    });
+                    onValue(this.accountReference, (snap2) => {
+                        this.accountData = snap2.val();
+                        this.accountName = snap2.val().name;
+                    })
+                    console.log('account was created', this.isLogedIn)
+                    return true
+                } else {
+                    console.log('password did not match', this.isLogedIn)
+                    return false
+                }
+            }
+        });
+    },
+    signOutNow() {
+        this.isLogedIn = false;
+        this.accountData = null;
+        this.accountReference = null;
+        this.accountName = null;
+    },
+    getWords() {
+        console.log(this.accountData.lookedupwords);
+        return this.accountData.lookedupwords;
+    },
+    addNewWord(wordToAdd) {
+        if (!this.accountData.lookedupwords.includes(wordToAdd)) {
+            this.accountData.lookedupwords.push(wordToAdd)
+            console.log()
+            set(this.accountReference, {
+                password: this.accountData.password,
+                name: this.accountData.name,
+                lookedupwords: this.accountData.lookedupwords
+            })
+        }
+    },
+    getSigninData(ref) {
+        ththis.accountReference = ref(db, `accounts/${ref}`);
+        onValue(this.accountReference, (snap) => {
+            this.accountData = snap.val()
+            console.log(snap.val());
+        });
+    }
+}
+
+let getLogin = document.getElementById("Login");
+let getLoginFormDiv = document.getElementById("sign-in-form-div")
+let getLoginForm = document.getElementById("sign-in-form")
+let loginAllet = document.getElementById("signin-allert")
+
+
+let getSignUp = document.getElementById("SignUp");
+let getSignUpFormDiv = document.getElementById("sign-up-form-div")
+let getSignUporm = document.getElementById("sign-up-form")
+let signUpAllet = document.getElementById("signup-allert")
+
+let getSignOut = document.getElementById("SignOut")
+let setUserName = document.getElementById("UserName");
+
+//let signin
+getLogin.addEventListener('click', (e) => { 
+    getLoginFormDiv.style.display = "block";
+})
+
+getLoginForm.addEventListener("submit", (e) => {
+    e.preventDefault()
+    let userAccountName = getLoginForm[0].value;
+    let userAccountPassword = getLoginForm[1].value;
+    serverData.doesAccountExsist(userAccountName, userAccountPassword)
+    setTimeout(() => {
+        let validAccount = serverData.isLogedIn
+        if (validAccount === 'invaled Username') {
+            loginAllet.innerText = "Invaled Username";
+        } else if (validAccount === 'wrong password') {
+            loginAllet.innerText = "Wrong password";
+        } else {
+            loginAllet.innerText = 'logIn succesful';
+            serverData.getAccountData(userAccountName, userAccountPassword)
+            setTimeout(() => {
+                setUserName.innerText = `Welcome ${serverData.accountData.name}`;
+
+            }, 250)
+            setTimeout(() => {
+                getLoginFormDiv.style.display = 'none'
+            }, 250)
+            loginAllet.innerText = '';
+            getSignUp.style.display = "none"
+            getLogin.style.display = 'none'
+            getSignOut.style.display = "block"
+
+        }
+    }, 1000)
+    setTimeout(() => {
+        setUserName.innerText = `${serverData.accountData.name}`;
+    }, 5000)
+})
+// signUP form
+getSignUp.addEventListener('click', (e) => {
+    getSignUpFormDiv.style.display = "block";
+})
+
+getSignUporm.addEventListener('submit', (e) => {
+    e.preventDefault()
+    let userAccountName = getLoginForm[0].value;
+    let userAccountPassword = getLoginForm[1].value;
+    serverData.doesAccountExsist(userAccountName, userAccountPassword)
+    
+    setTimeout(() => {
+        let validAccount = serverData.isLogedIn
+        if (validAccount === 'invaled Username') {
+            signUpAllet.innerText = "Invaled Username";
+        } else {
+            signUpAllet.innerText = "Username has been taken"
+        }
+    },1000)
+})
+
+
 // gets the canvas element
 const canvasHere = document.querySelector('canvas');
 
@@ -36,7 +219,11 @@ class Ball {
         // 2 * Math.PI is an end point which is equivalent to 360 degree
         ctx.arc(this.x, this.y, this.size, 0, 2 * Math.PI);
         ctx.fill(); // finish drawing
-        ctx.font = '25px Times New Roman'
+        ctx.font = "25.5px Fira Sans";
+        ctx.shadowColor = 'black';
+        ctx.shadowOffsetX = 1;
+        ctx.shadowOffsetY = 1;
+
         ctx.strokeText(this.textTOadd, this.x - (this.size-5), this.y+5)
     }
 
@@ -56,6 +243,8 @@ class Ball {
         // everytime updateBall func is called
         this.x += this.velx;
         this.y += this.vely;
+        // canvasHere.width = width;
+        // canvasHere.height = height;
     }
 }
 
@@ -76,7 +265,7 @@ for (let i = 0; i < 20;i++){
         let size = 0;
         
         setTimeout(() => {
-            console.log(word)
+            //console.log(word)
             for (let i = 0; i < word.length; i++) {
                 if (i < 4) {
                     size += 7.75
