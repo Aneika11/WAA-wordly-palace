@@ -33,17 +33,21 @@
         <div id="ex-holder"> <p id="example"></p> <button id="audio-btn"></button> </div>
     </div>
 
-   
+   <div id="sign-up-container">
+    <div id="background-for-login"></div>
     <div id="sign-in-form-div">
         <p id="signin-allert"></p>
         <form id="sign-in-form">
-            <label for="fname">User name:</label>
-            <input type="text" name="fname" class="geting-user-data">
+            <p id="login-text">Login to your account</p>
+            <label  for="fname" class="input">Username</label>
             <br>
-            <label for="userpassword">password:</label>
-            <input type="password" name="userpassword" class="geting-user-data">
+            <input type="text" name="fname" class="geting-user-data login-form">
             <br>
-            <input type="submit">
+            <label for="userpassword" class="input">Password</label>
+            <br>
+            <input type="password" name="userpassword" class="geting-user-data login-form">
+            <br>
+            <button id="login" >Login</button>
             <br>
         </form>
     </div>
@@ -63,8 +67,11 @@
                 <input type="submit">
                 <br>
             </form>
-        </div>
-    </div>
+         </div>
+       </div>
+   </div>
+
+   
     <div id="my-words-main">
         <div id="my-words-background"></div>
     </div>
@@ -103,6 +110,7 @@
             <p>hi there</p>
         </div>
     </div>
+
     <!-- <div id="arrayOfWords"></div> -->
     <canvas></canvas>
 
