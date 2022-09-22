@@ -135,3 +135,23 @@ body{
     z-index: 20;
 }
 
+#discription{
+    position: absolute;
+}
+#my-words-main{
+    height: 100%;
+    width: 100%;
+    position: absolute;
+    top:90px;
+}
+#my-words-background{
+    background-color: rgba(85, 87, 92, 0.75);
+    height: calc(100% - 100px);
+    width: calc(100% - 100px);
+    -webkit-box-shadow: 20px 20px 22px rgba(0, 0, 0, 0.2);
+    box-shadow: 20px 20px 22px rgba(255, 255, 255, 0.2);
+    margin: 20px auto 0;
+    -webkit-backdrop-filter: blur(20px);
+    backdrop-filter: blur(20px);
+    border-radius: 100px;
+}
