@@ -125,12 +125,20 @@ body{
 }
 
 #sign-up-form-div{
-    background-color: red;
-    width:300px;
+    width: 350px;
+    position: absolute;
+    left: calc(50% - 100px);
+    padding: 10px;  
     display: none;
 }
 
 #signUpAllet{
     color:red;
+}
+
+   
+
+#sign-up-form-holder{
+    z-index: 20;
 }
 
