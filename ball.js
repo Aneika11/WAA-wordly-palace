@@ -108,6 +108,8 @@ let signUpAllet = document.getElementById("signup-allert")
 
 let getSignOut = document.getElementById("SignOut")
 let setUserName = document.getElementById("UserName");
+let getMyWwordsbutton = document.getElementById("get-my-words")
+
 
 // logout 
 
@@ -155,6 +157,7 @@ getLoginForm.addEventListener("submit", (e) => {
             loginAllet.innerText = '';
             getSignUp.style.display = "none"
             getLogin.style.display = 'none'
+            getMyWwordsbutton.style.display = "block"
             getSignOut.style.display = "block"
 
         }
@@ -394,7 +397,6 @@ canvasHere.addEventListener('click', function (event) {
                         border: 1px solid rgba(255,255,255,0.125);
                         width:700px;
                         font-family: 'Aref Ruqaa Ink', serif;
-                        font-family: 'Source Sans Pro', sans-serif;
                         padding: 10px;
                         position: absolute;
                         left: calc(50% - 350px);
