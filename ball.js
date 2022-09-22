@@ -211,6 +211,16 @@ getSignUporm.addEventListener('submit', (e) => {
 
 // gets the canvas element
 const canvasHere = document.querySelector('canvas');
+let discription = document.getElementById("discription")
+let name = document.getElementById("name")
+let meaning = document.getElementById("meaning")
+let example = document.getElementById("example")
+let chooseWord = document.getElementById("box-content")
+let container = document.getElementById("container")
+let audio = document.getElementById("audio-btn")
+
+// canvasHere.style.background = "red"
+
 
 // gets the width and height of browser viewport
 const width = window.innerWidth-20;
@@ -226,7 +236,7 @@ const ctx = canvasHere.getContext('2d');
 // let elemTop = ctx.offsetTop + ctx.clientTop;
 // create Ball class
 class Ball {
-    constructor(x, y, velx, vely, size, color,textTOadd ,id) {
+    constructor(x, y, velx, vely, size, color,textTOadd ,id,savedDefinition, savedPronounciation) {
         this.x = x; // horizontal position of the ball
         this.y = y; // vertical position of the ball
         this.velx = velx; // velocity x added to coordinate x when we animate our ball
@@ -235,6 +245,8 @@ class Ball {
         this.color = color; // fill ball shape with given color
         this.textTOadd = textTOadd;
         this.id = id;
+        this.savedDefinition = savedDefinition;
+        this.savedPronounciation = savedPronounciation;
     }
 
     // create draw func
@@ -285,11 +297,13 @@ function random(min, max) {
 //   create some balls and store in an array
 const balls = [];
 let ballnumber = 0;
-for (let i = 0; i < 20;i++){
+for (let i = 0; i < 25;i++){
     let word;
     // api here
-    fetch("https://api.api-ninjas.com/v1/randomword/?key=puHp1RTi4iddWO3YYmNuXQ==lTdWygeqoi5P3jQz").then(res => res.json()).then(data => {
-        word = data.word
+    fetch("https://random-words-with-pronunciation.p.rapidapi.com/word?rapidapi-key=d90feb3493msh188349b87904e98p1e8634jsne0ad3411d51a").then(res => res.json()).then(data => {
+        // console.log(data)
+        word = data[0].word
+
         let size = 0;
         
         setTimeout(() => {
@@ -320,7 +334,9 @@ for (let i = 0; i < 20;i++){
                 size,
                 `rgb(${random(100, 255)}, ${random(100, 255)}, ${random(100, 255)})`,
                 word,
-                ballnumber
+                ballnumber,
+                 data[0].definition,
+                 data[0].pronunciation
             );
             balls.push(ball);
             ballnumber++
@@ -354,12 +370,77 @@ canvasHere.addEventListener('click', function (event) {
     let y = event.layerY -28;
     // console.log(event)
     // Collision detection between clicked offset and element.
+    let wordToSearch;
     balls.forEach( (element)=> {
+        element.fillStyle = 'blue';
+        
         if (x > (element.x - 68) && x < (element.x + 68) && y > (element.y - 68) && y < (element.y + 68)) {
             // word
             console.log(element.textTOadd)
-        }
-    });
+            // fetch(`https://wordsapiv1.p.rapidapi.com/words/${element.textTOadd}/?rapidapi-key=a814b05c93msh2cd39afebec73fap1d509cjsnb19622b7a4fa`)
+            //       .then(res => res.json()).then(data2 => {
+            //         console.log(data2)
+          
+                
+                    
+                        name.innerText = `Word: ${element.textTOadd}`
+                        meaning.innerText = `Meaning: ${element.savedDefinition} `
+                        example.innerText = `Pronunciation: ${element.savedPronounciation}`
+                        audio.innerText = "Audio"
+    
+                        discription.style.cssText = `backdrop-filter: blur(16px);
+                        background-color: rgba(17,25,40,0.75);
+                        border-radius: 12px;
+                        border: 1px solid rgba(255,255,255,0.125);
+                        width:700px;
+                        font-family: 'Aref Ruqaa Ink', serif;
+                        font-family: 'Source Sans Pro', sans-serif;
+                        padding: 10px;
+                        position: absolute;
+                        left: calc(50% - 350px);
+                        font-size: 30px;
+                        color: white;
+                        -webkit-backdrop-filter: blur(16px);
+                        `
+
+                        container.style.display = "none";
+
+                      
+                        audio.addEventListener("click", () => {
+                            
+                            speaks = [
+                                {
+                                  "name": "Alex",
+                                  "lang": "en-US"
+                                }
+                            ]
+                         const msg = new SpeechSynthesisUtterance();
+                            msg.volume = 1; 
+                            msg.rate = 1; 
+                            msg.pitch = 1.5; 
+                            msg.text  = `${element.textTOadd}` ;
+                        speechSynthesis.speak(msg);
+                        toggle()
+                       
+                        function toggle() {
+                            speechSynthesis.cancel()
+                            speechSynthesis.speak(msg);
+                        }
+                        })
+                        
+
+                    
+             
+
+
+
+
+
+                 
+            }
+    })
+
+    
     balls[0].textTOadd = "noijo"
     //console.log(balls[0],x,y,balls[0].size)
 
