@@ -16,7 +16,6 @@ let app = initializeApp(firebaseConfig);
 let db = getDatabase();
 
 let serverData = {
-    wordOfTheDay: '',
     isLogedIn: false,
     accountData: null,
     accountReference: null,
@@ -37,45 +36,33 @@ let serverData = {
         });
             //console.log(returnThisAccount)
     },
-    getAccountData(userName, password) {
+    getAccountData() {
         onValue(this.accountReference, (snap) => {
             this.accountData = snap.val()
-            console.log(snap.val());
+            this.accountName = snap.val().name
         });
         this.isLogedIn = true;
-        console.log(this.accountData);
+        //console.log(this.accountData);
         localStorage.setItem("username", this.accountData.name);
         return 'successfully logged in'
     },
-    creatAccount(userName, password, confirmpassword) {
+    creatAccount(userName, password) {
         this.accountReference = ref(db, `accounts/${userName}`);
         onValue(this.accountReference, (snap) => {
-            if (snap.val()) {
-                return false
-                // console.log(snap.val())
-            } else {
-                if (password === confirmpassword) {
-                    this.isLogedIn = true;
-                    set(this.accountReference, {
-                        password: password,
-                        name: userName,
-                        lookedupwords: {
-                            0: "irony",
-                            1: true,
-                            2: false,
-                        }
-                    });
-                    onValue(this.accountReference, (snap2) => {
-                        this.accountData = snap2.val();
-                        this.accountName = snap2.val().name;
-                    })
-                    console.log('account was created', this.isLogedIn)
-                    return true
-                } else {
-                    console.log('password did not match', this.isLogedIn)
-                    return false
-                }
-            }
+            this.isLogedIn = true;
+            set(this.accountReference, {
+                password: password,
+                name: userName,
+                lookedupwords: [
+                    true
+                ]
+            });
+            onValue(this.accountReference, (snap2) => {
+                this.accountData = snap2.val();
+                this.accountName = snap2.val().name;
+            })
+            //console.log('account was created', this.isLogedIn)
+            return true
         });
     },
     signOutNow() {
@@ -85,13 +72,13 @@ let serverData = {
         this.accountName = null;
     },
     getWords() {
-        console.log(this.accountData.lookedupwords);
+        // console.log(this.accountData.lookedupwords);
         return this.accountData.lookedupwords;
     },
     addNewWord(wordToAdd) {
         if (!this.accountData.lookedupwords.includes(wordToAdd)) {
             this.accountData.lookedupwords.push(wordToAdd)
-            console.log()
+            // console.log()
             set(this.accountReference, {
                 password: this.accountData.password,
                 name: this.accountData.name,
@@ -103,7 +90,7 @@ let serverData = {
         ththis.accountReference = ref(db, `accounts/${ref}`);
         onValue(this.accountReference, (snap) => {
             this.accountData = snap.val()
-            console.log(snap.val());
+            // console.log(snap.val());
         });
     }
 }
@@ -122,6 +109,21 @@ let signUpAllet = document.getElementById("signup-allert")
 let getSignOut = document.getElementById("SignOut")
 let setUserName = document.getElementById("UserName");
 
+// logout 
+
+getSignOut.addEventListener('click', () => { 
+    console.log(serverData)
+    serverData.accountData = null;
+    serverData.accountName = null;
+    serverData.isLogedIn = false;
+    serverData.accountReference = null;
+    getSignUp.style.display = "block"
+    getLogin.style.display = 'block'
+    getSignOut.style.display = "none"
+    console.log(serverData)
+    setUserName.innerText = ''
+
+})
 //let signin
 getLogin.addEventListener('click', (e) => { 
     getLoginFormDiv.style.display = "block";
@@ -142,7 +144,9 @@ getLoginForm.addEventListener("submit", (e) => {
             loginAllet.innerText = 'logIn succesful';
             serverData.getAccountData(userAccountName, userAccountPassword)
             setTimeout(() => {
-                setUserName.innerText = `Welcome ${serverData.accountData.name}`;
+                if (serverData.accountData) {
+                    setUserName.innerText = `Welcome ${serverData.accountData.name}`;
+                }
 
             }, 250)
             setTimeout(() => {
@@ -156,7 +160,9 @@ getLoginForm.addEventListener("submit", (e) => {
         }
     }, 1000)
     setTimeout(() => {
-        setUserName.innerText = `${serverData.accountData.name}`;
+        if (serverData.accountData) {
+            setUserName.innerText = `${serverData.accountData.name}`;
+        }
     }, 5000)
 })
 // signUP form
@@ -166,18 +172,40 @@ getSignUp.addEventListener('click', (e) => {
 
 getSignUporm.addEventListener('submit', (e) => {
     e.preventDefault()
-    let userAccountName = getLoginForm[0].value;
-    let userAccountPassword = getLoginForm[1].value;
-    serverData.doesAccountExsist(userAccountName, userAccountPassword)
+    let userAccountName = getSignUporm[0].value;
+    let userPassword = getSignUporm[1].value;
+    let confirmuserPassword = getSignUporm[2].value;
+    // console.log(userAccountName, userPassword, confirmuserPassword)
+    serverData.doesAccountExsist(userAccountName)
     
     setTimeout(() => {
         let validAccount = serverData.isLogedIn
         if (validAccount === 'invaled Username') {
-            signUpAllet.innerText = "Invaled Username";
+            if (userPassword !== confirmuserPassword) {
+                signUpAllet.innerText = "Pssword does not match"
+            } else { 
+                serverData.creatAccount(userAccountName, userPassword)
+                signUpAllet.innerText = "Account created"
+                getSignUp.style.display = "none"
+                getLogin.style.display = 'none'
+                getSignOut.style.display = "block"
+                setTimeout(() => { 
+                    setUserName.innerText = `Welcome ${serverData.accountData.name}`;
+                    setTimeout(() => {
+                        getSignUpFormDiv.style.display = 'none'
+                    }, 250)
+                }, 2000)
+                
+            }
         } else {
             signUpAllet.innerText = "Username has been taken"
         }
-    },1000)
+    }, 1000)
+    setTimeout(() => {
+        if (serverData.accountData) {
+            setUserName.innerText = `${serverData.accountData.name}`;
+        }
+    }, 5000)
 })
 
 
@@ -273,20 +301,21 @@ for (let i = 0; i < 20;i++){
                     size += 5.5
                 }
             }
-            let xspeed = random(size, width - size);
-            let yspeed = random(size, height - size);
+            let xspeed = random(-2,2);
+            let yspeed = random(-2, 2);
 
             while (xspeed === 0) {
-                xspeed = random(size, width - size);
+                xspeed = random(-2, 2);
             }
             while (yspeed === 0) {
-                yspeed = random(size, height - size);
+                yspeed = random(-2, 2);
             }
+
             const ball = new Ball(
                 random(size, width - size),
                 random(size, height - size),
-                random(-2, 2),
-                random(-2, 2),
+                xspeed,
+                yspeed,
                 // 0,0,
                 size,
                 `rgb(${random(100, 255)}, ${random(100, 255)}, ${random(100, 255)})`,
