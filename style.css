@@ -1,7 +1,6 @@
 body{
     margin: 0px;
     padding:0px;
-  /* background-image: url(https://wallpapercave.com/wp/igxNOHD.jpg); */
     font-family: Georgia, serif;
     background-color: black;
 
@@ -86,12 +85,6 @@ body{
     display: none;
 
 }
-
-/* #discription{
-    backdrop-filter: blur(16px);
-
-} */
-
 
 #nav{
     background-color: gray;
