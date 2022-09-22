@@ -408,7 +408,7 @@ canvasHere.addEventListener('click', function (event) {
                       
                         audio.addEventListener("click", () => {
                             
-                            speaks = [
+                            let speaks = [
                                 {
                                   "name": "Alex",
                                   "lang": "en-US"
