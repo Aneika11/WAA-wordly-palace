@@ -26,3 +26,10 @@ MVP:
 Broaden Vocabulary, Improvements in the sophistication of speech learn the recommended word
 Pop up that tells the history and interesting facts about the word suggested
 
+Contact:
+
+Developer: Wayne March
+
+LinkedIn: Wayne March
+Github: marcwayn8
+Thank you 😀!
