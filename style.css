@@ -102,15 +102,45 @@ body{
 #SignOut{
     display: none;
 }
+#background-for-login{
+    padding: 10px;
+    width:300px;
+    height: 400px;
+    position:absolute;
+    left: calc(50% - 100px);
+    backdrop-filter: blur(16px);
+    background-color: rgba(17,25,40,0.75);
+    border-radius: 12px;
+    border: 1px solid rgba(255,255,255,0.125);           
+    font-family:'Archivo',sans-serif;
+    left: calc(50% - 200px);
+    font-size: 30px;       
+    -webkit-backdrop-filter: blur(16px);   
+}
 
 #sign-in-form-div{
     padding: 10px;
-    background-color: red;
     width:300px;
     position:absolute;
-    left: calc(50% - 100px);
+    left: calc(50% - 200px);
+    
+    color:white;
+    
+    
+    /* backdrop-filter: blur(16px);
+    background-color: rgba(17,25,40,0.75);
+    border-radius: 12px;
+    border: 1px solid rgba(255,255,255,0.125);           
+    font-family: 'Aref Ruqaa Ink', serif;
+    font-family:'Archivo',sans-serif;
+           
+    /* left: calc(50% - 350px); */
+    /* font-size: 30px; */
+/*                        
+    -webkit-backdrop-filter: blur(16px); */ 
     display: none;
 }
+
 
 /* asds */
 .geting-user-data{
@@ -133,5 +163,36 @@ body{
 
 #sign-up-form-holder{
     z-index: 20;
+}
+.login-form{
+    margin: 20px;
+    width:200px;
+    left:0;
+    padding:3px;
+    -webkit-backdrop-filter: blur(16px);
+   backdrop-filter: blur(16px);
+   background-color: rgba(120, 123, 128, 0.75);
+  
+}
+.input{
+   position: absolute;
+   margin-top: 20px; 
+   margin-left: 20px;
+   
+   
+}
+#login-text{
+    text-align: center;
+}
+#login{
+    margin-left:20px;
+    margin-top: 20px;
+    width:210px;
+    -webkit-backdrop-filter: blur(16px);
+   backdrop-filter: blur(16px);
+   background-color: rgba(145, 149, 156, 0.75);
+   color:white; 
+   padding: 5px 0;
+  
 }
 

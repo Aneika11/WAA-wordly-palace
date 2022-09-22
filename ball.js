@@ -394,7 +394,6 @@ canvasHere.addEventListener('click', function (event) {
                         border: 1px solid rgba(255,255,255,0.125);
                         width:700px;
                         font-family: 'Aref Ruqaa Ink', serif;
-                        font-family: 'Source Sans Pro', sans-serif;
                         padding: 10px;
                         position: absolute;
                         left: calc(50% - 350px);
