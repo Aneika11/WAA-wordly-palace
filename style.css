@@ -4,6 +4,7 @@ body{
   background-image: url(https://wallpapercave.com/wp/igxNOHD.jpg);
     font-family: Georgia, serif;
 }
+
 #arrayOfWords{
     display: grid;
     justify-content: center;
@@ -14,6 +15,7 @@ body{
     grid-gap: 70px;
     padding: 50px;
 }
+
 h3{
     background-color: white;
     max-width: 700px;
@@ -21,4 +23,44 @@ h3{
     text-align: center;
     height: 40px;
 
+}
+
+#nav{
+    background-color: blue;
+    padding: 10px;
+    display: flex;
+    justify-content: space-between;
+}
+#account-log{
+    display: flex;
+    
+}
+#account-log p{
+    margin: 20px 10px;
+}
+#SignOut{
+    display: none;
+}
+
+#sign-in-form-div{
+    padding: 10px;
+    background-color: red;
+    width:300px;
+    position:absolute;
+    left: calc(50% - 100px);
+    display: none;
+}
+
+/* asds */
+.geting-user-data{
+    margin: 0 0 10px;
+}
+
+#sign-up-form-div{
+    background-color: red;
+    width:300px;
+}
+
+#signUpAllet{
+    color:red;
 }
