@@ -108,6 +108,8 @@ let signUpAllet = document.getElementById("signup-allert")
 
 let getSignOut = document.getElementById("SignOut")
 let setUserName = document.getElementById("UserName");
+let getMyWwordsbutton = document.getElementById("get-my-words")
+
 
 // logout 
 
@@ -155,6 +157,7 @@ getLoginForm.addEventListener("submit", (e) => {
             loginAllet.innerText = '';
             getSignUp.style.display = "none"
             getLogin.style.display = 'none'
+            getMyWwordsbutton.style.display = "block"
             getSignOut.style.display = "block"
 
         }
