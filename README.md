@@ -3,9 +3,9 @@
 
 ###Team:###
 
-* Product Manager: Aneika Nanton
+* Product Manager/Developer: Aneika Nanton
 * Developer: Aldair Garcia
-* Developer: Wayne March
+
 
 Tech Stack:Frontend: HTML, CSS, Javascript
 
@@ -38,8 +38,14 @@ Pop up that tells the history and interesting facts about the word suggested
 
 ###Contact:###
 
-Developer: Wayne March
+Developer: Aneika Nanton 
+LinkedIn: www.linkedin.com/in/aneika-nanton
+Github: https://github.com/Aneika11
 
-LinkedIn: Wayne March
-Github: marcwayn8
+Developer: Aldair Garcia
+LinkedIn: www.linkedin.com/in/aldair-garcia-angon/
+Github: https://github.com/AGarciaNY
+
+
+
 Thank you 😀!
