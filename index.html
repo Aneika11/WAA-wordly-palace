@@ -34,6 +34,7 @@
     </div>
 
    <div id="sign-up-container">
+    <div id="blur-background"></div>
     <div id="background-for-login"></div>
     <div id="sign-in-form-div">
         <p id="signin-allert"></p>
@@ -56,16 +57,19 @@
         <div id="sign-up-form-holder">
             <p id="signup-allert"> </p>
             <form id="sign-up-form">
-                <label for="fname">User name:</label>
-                <input type="text" name="fname" class="geting-user-data">
+                <p id="sign-up-text">Sign up Here</p>
+                <label for="fname" class="input">Username</label>
                 <br>
-                <label for="userpassword">password:</label>
-                <input type="password" name="userpassword" class="geting-user-data">
+                <input type="text" name="fname" class="geting-user-data ">
                 <br>
-                <label for="confirmuserpassword">confirm password:</label>
-                <input type="password" name="confirmuserpassword" class="geting-user-data">
-                <input type="submit">
+                <label for="userpassword" class="input">Password</label>
                 <br>
+                <input type="password" name="userpassword" class="geting-user-data ">
+                <br>
+                <label for="confirmuserpassword" class="input">Confirm password</label>
+                <input type="password" name="confirmuserpassword" class="geting-user-data" placeholder="Confirm Password">
+                <br>
+                <button class="signUp">Sign Up</button>
             </form>
          </div>
        </div>

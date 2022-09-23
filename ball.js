@@ -99,6 +99,8 @@ let getLogin = document.getElementById("Login");
 let getLoginFormDiv = document.getElementById("sign-in-form-div")
 let getLoginForm = document.getElementById("sign-in-form")
 let loginAllet = document.getElementById("signin-allert")
+let blur = document.getElementById("blur-background")
+let loginBackground = document.getElementById("background-for-login")
 
 
 let getSignUp = document.getElementById("SignUp");
@@ -124,11 +126,15 @@ getSignOut.addEventListener('click', () => {
     getSignOut.style.display = "none"
     console.log(serverData)
     setUserName.innerText = ''
+    blur.style.display = "block"
+    loginBackground.style.display = "none"
+    getLoginFormDiv.style.display = "block";
 
 })
 //let signin
 getLogin.addEventListener('click', (e) => { 
     getLoginFormDiv.style.display = "block";
+    
 })
 
 getLoginForm.addEventListener("submit", (e) => {
@@ -144,6 +150,8 @@ getLoginForm.addEventListener("submit", (e) => {
             loginAllet.innerText = "Wrong password";
         } else {
             loginAllet.innerText = 'logIn succesful';
+            blur.style.display = "none"
+            loginBackground.style.display = "none"
             serverData.getAccountData(userAccountName, userAccountPassword)
             setTimeout(() => {
                 if (serverData.accountData) {
@@ -171,6 +179,8 @@ getLoginForm.addEventListener("submit", (e) => {
 // signUP form
 getSignUp.addEventListener('click', (e) => {
     getSignUpFormDiv.style.display = "block";
+    // getLoginFormDiv.style.display = "none"
+
 })
 
 getSignUporm.addEventListener('submit', (e) => {
@@ -183,9 +193,9 @@ getSignUporm.addEventListener('submit', (e) => {
     
     setTimeout(() => {
         let validAccount = serverData.isLogedIn
-        if (validAccount === 'invaled Username') {
+        if (validAccount === 'invalid Username') {
             if (userPassword !== confirmuserPassword) {
-                signUpAllet.innerText = "Pssword does not match"
+                signUpAllet.innerText = "Password does not match"
             } else { 
                 serverData.creatAccount(userAccountName, userPassword)
                 signUpAllet.innerText = "Account created"
@@ -196,6 +206,9 @@ getSignUporm.addEventListener('submit', (e) => {
                     setUserName.innerText = `Welcome ${serverData.accountData.name}`;
                     setTimeout(() => {
                         getSignUpFormDiv.style.display = 'none'
+                        blur.style.display = "none"
+                        loginBackground.style.display = "none"
+
                     }, 250)
                 }, 2000)
                 
