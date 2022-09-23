@@ -140,13 +140,15 @@ getSignOut.addEventListener('click', () => {
     console.log(serverData)
     setUserName.innerText = ''
     blur.style.display = "block"
-    loginBackground.style.display = "none"
+    loginBackground.style.display = "block"
     getLoginFormDiv.style.display = "block";
+
 
 })
 //let signin
 getLogin.addEventListener('click', (e) => {
     getLoginFormDiv.style.display = "block";
+    getSignUpFormDiv.style.display = "none";
     
 })
 
@@ -163,8 +165,9 @@ getLoginForm.addEventListener("submit", (e) => {
             loginAllet.innerText = "Wrong password";
         } else {
             loginAllet.innerText = 'logIn succesful';
-            blur.style.display = "none"
-            loginBackground.style.display = "none"
+            blur.style.display = "none";
+            loginBackground.style.display = "none";
+            getMyWwordsbutton.style.display ="block";
             serverData.getAccountData(userAccountName, userAccountPassword)
             setTimeout(() => {
                 if (serverData.accountData) {
@@ -173,6 +176,8 @@ getLoginForm.addEventListener("submit", (e) => {
             }, 250)
             setTimeout(() => {
                 getLoginFormDiv.style.display = 'none'
+                getLoginForm[0].value = "";
+                getLoginForm[1].value = ""
             }, 250)
             loginAllet.innerText = '';
             getSignUp.style.display = "none"
@@ -191,7 +196,7 @@ getLoginForm.addEventListener("submit", (e) => {
 // signUP form
 getSignUp.addEventListener('click', (e) => {
     getSignUpFormDiv.style.display = "block";
-    // getLoginFormDiv.style.display = "none"
+    getLoginFormDiv.style.display = "none"
 
 })
 
@@ -443,9 +448,7 @@ canvasHere.addEventListener('click', function (event) {
             console.log(element.x, element.y)
             // word
             console.log(element.textTOadd)
-            // fetch(`https://wordsapiv1.p.rapidapi.com/words/${element.textTOadd}/?rapidapi-key=a814b05c93msh2cd39afebec73fap1d509cjsnb19622b7a4fa`)
-            //       .then(res => res.json()).then(data2 => {
-            //         console.log(data2)
+            setMyDefinitionBox.value ="";
 
 
 
