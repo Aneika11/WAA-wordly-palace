@@ -252,7 +252,7 @@ getMyWwordsbutton.addEventListener('click', () => {
             getWordDefinition.style.display = "block";
             wordContainer.style.display = "none";
             savedDefinition.innerText = serverData.accountData.lookedupwords[i].definition;
-            yourDefinition.innerText = serverData.accountData.lookedupwords[i].youdefinition;
+            yourDefinition.innerText = serverData.accountData.lookedupwords[i].yourDefinition;
             myword.innerText = serverData.accountData.lookedupwords[i].word;
         })
         wordContainer.append(wordButton);
