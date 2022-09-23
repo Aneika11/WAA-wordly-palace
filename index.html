@@ -43,23 +43,43 @@
         </textarea>
         <button id="save-my-word">Save Word</button>
     </div>
-
-    <div id="sign-up-container">
-        <div id="background-for-login"></div>
-        <div id="sign-in-form-div">
-            <p id="signin-allert"></p>
-            <form id="sign-in-form">
-                <p id="login-text">Login to your account</p>
+   <div id="sign-up-container">
+    <div id="blur-background"></div>
+    <div id="background-for-login"></div>
+    <div id="sign-in-form-div">
+        <p id="signin-allert"></p>
+        <form id="sign-in-form">
+            <p id="login-text">Login to your account</p>
+            <label  for="fname" class="input">Username</label>
+            <br>
+            <input type="text" name="fname" class="geting-user-data login-form">
+            <br>
+            <label for="userpassword" class="input">Password</label>
+            <br>
+            <input type="password" name="userpassword" class="geting-user-data login-form">
+            <br>
+            <button id="login" >Login</button>
+            <br>
+        </form>
+    </div>
+    <!-- confirm -->
+    <div id="sign-up-form-div">
+        <div id="sign-up-form-holder">
+            <p id="signup-allert"> </p>
+            <form id="sign-up-form">
+                <p id="sign-up-text">Sign up Here</p>
                 <label for="fname" class="input">Username</label>
                 <br>
-                <input type="text" name="fname" class="geting-user-data login-form">
+                <input type="text" name="fname" class="geting-user-data ">
                 <br>
                 <label for="userpassword" class="input">Password</label>
                 <br>
-                <input type="password" name="userpassword" class="geting-user-data login-form">
+                <input type="password" name="userpassword" class="geting-user-data ">
                 <br>
-                <button id="login">Login</button>
+                <label for="confirmuserpassword" class="input">Confirm password</label>
+                <input type="password" name="confirmuserpassword" class="geting-user-data" placeholder="Confirm Password">
                 <br>
+                <button class="signUp">Sign Up</button>
             </form>
         </div>
         <!-- confirm -->

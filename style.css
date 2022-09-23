@@ -88,8 +88,10 @@ body {
 
 }
 
-#nav {
-    background-color: rgb(157, 205, 177);
+
+#nav{
+    /* background-color: rgb(157, 205, 177); */
+    background-color: #A87CD0;
     padding: 10px;
     display: flex;
     justify-content: space-between;
@@ -108,18 +110,31 @@ body {
     display: none;
 }
 
-#background-for-login {
+#blur-background{
     padding: 10px;
-    width: 300px;
-    height: 400px;
-    position: absolute;
+    width:100%;
+    height: 800px;
+    position:absolute;
+    backdrop-filter: blur(16px);
+    background-color: rgba(17,25,40,0.75);
+    border-radius: 12px;
+    border: 1px solid rgba(255,255,255,0.125);           
+    font-family:'Archivo',sans-serif;
+    font-size: 30px;       
+    -webkit-backdrop-filter: blur(16px);
+}
+#background-for-login{
+    padding: 10px;
+    width:250px;
+    height: 350px;
+    margin-top: 90px;
+    position:absolute;
     left: calc(50% - 100px);
     backdrop-filter: blur(16px);
     background-color: rgba(17, 25, 40, 0.75);
     border-radius: 12px;
     border: 1px solid rgba(255, 255, 255, 0.125);
     font-family: 'Archivo', sans-serif;
-    left: calc(50% - 200px);
     font-size: 30px;
     -webkit-backdrop-filter: blur(16px);
 }
@@ -147,19 +162,34 @@ body {
     display: none;
     z-index: 400;
 }
-
-
-/* asds */
-.geting-user-data {
-    margin: 0 0 10px;
+.signUp{
+    margin-left:25px;
+    margin-top: 20px;
+    width:210px;
+    -webkit-backdrop-filter: blur(16px);
+   backdrop-filter: blur(16px);
+   background-color: rgba(145, 149, 156, 0.75);
+   color:white; 
+   padding: 5px 0;
+  
 }
 
-#sign-up-form-div {
-    width: 350px;
+
+
+#sign-up-form-div{
+    /* width: 350px;
     position: absolute;
     left: calc(50% - 100px);
+    padding: 10px;  
+    display: none; */
     padding: 10px;
+    width:350px;
+    position:absolute;
+    left: calc(50% - 200px);
     display: none;
+    z-index: 400;
+    color:white;
+    margin-top: 70px;
 }
 
 #signUpAllet {
@@ -178,25 +208,26 @@ body {
     left: 0;
     padding: 3px;
     -webkit-backdrop-filter: blur(16px);
-    backdrop-filter: blur(16px);
-    background-color: rgba(120, 123, 128, 0.75);
-
+   backdrop-filter: blur(16px);
+   background-color: rgba(120, 123, 128, 0.75);
+  
 }
-
-.input {
-    position: absolute;
-    margin-top: 20px;
+.input{
+   position: absolute;
+   margin-top: 20px; 
+   margin-left: 20px;
+   
+   
+}
+#login-text{
     margin-left: 20px;
-
-
+}
+#sign-up-text{
+   margin-left: 40px;
 }
 
-#login-text {
-    text-align: center;
-}
-
-#login {
-    margin-left: 20px;
+#login{
+    margin-left:25px;
     margin-top: 20px;
     width: 210px;
     -webkit-backdrop-filter: blur(16px);
@@ -327,3 +358,16 @@ div#my-words-here {
 #set-my-definition{
     display: none;
 }
+
+.geting-user-data{
+    margin: 20px;
+    padding: 20px;
+    width:210px;
+    margin-right: 500px;
+    padding:3px;
+    -webkit-backdrop-filter: blur(16px);
+   backdrop-filter: blur(16px);
+   background-color: rgba(120, 123, 128, 0.75);
+   
+}
+
