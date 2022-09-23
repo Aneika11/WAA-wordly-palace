@@ -34,7 +34,7 @@ let serverData = {
                 this.isLogedIn = 'invaled Username';
             }
         });
-            //console.log(returnThisAccount)
+        //console.log(returnThisAccount)
     },
     getAccountData() {
         onValue(this.accountReference, (snap) => {
@@ -54,7 +54,11 @@ let serverData = {
                 password: password,
                 name: userName,
                 lookedupwords: [
-                    true
+                    {
+                        word: "hi",
+                        definition: "saying hi",
+                        youdefinition:"having fun"
+                    }
                 ]
             });
             onValue(this.accountReference, (snap2) => {
@@ -71,28 +75,17 @@ let serverData = {
         this.accountReference = null;
         this.accountName = null;
     },
-    getWords() {
-        // console.log(this.accountData.lookedupwords);
-        return this.accountData.lookedupwords;
-    },
-    addNewWord(wordToAdd) {
-        if (!this.accountData.lookedupwords.includes(wordToAdd)) {
-            this.accountData.lookedupwords.push(wordToAdd)
+    addNewWord(wordToAdd, definition, yourDefinitionHere) {
+        //if (!this.accountData.lookedupwords.includes(wordToAdd)) {
+        this.accountData.lookedupwords.push({ word: wordToAdd, definition, yourDefinition: yourDefinitionHere })
             // console.log()
             set(this.accountReference, {
                 password: this.accountData.password,
                 name: this.accountData.name,
                 lookedupwords: this.accountData.lookedupwords
             })
-        }
+        //}
     },
-    getSigninData(ref) {
-        ththis.accountReference = ref(db, `accounts/${ref}`);
-        onValue(this.accountReference, (snap) => {
-            this.accountData = snap.val()
-            // console.log(snap.val());
-        });
-    }
 }
 
 let getLogin = document.getElementById("Login");
@@ -110,12 +103,32 @@ let signUpAllet = document.getElementById("signup-allert")
 
 let getSignOut = document.getElementById("SignOut")
 let setUserName = document.getElementById("UserName");
+
+let backgroundBox = document.getElementById("my-words-main")
 let getMyWwordsbutton = document.getElementById("get-my-words")
+let getWordHolders = document.getElementById("my-words-holder")
+let getMyWord = document.getElementById("my-words-here")
+let getMyWordBackground = document.getElementById("my-words-here-background")
+let discription = document.getElementById("discription");
+let exitWords = document.getElementById("exit-words");
+let wordContainer = document.getElementById("word-container")
+let getWordDefinition = document.getElementById("get-word-definition")
+let backToMyWords = document.getElementById("back-to-my-words")
 
-
+let getSaveWordButton = document.getElementById("save-my-word")
+let savedDefinition = document.getElementById("saved-definition")
+let yourDefinition = document.getElementById("your-definition")
+let myword = document.getElementById("my-word")
+let setMyDefinitionBox = document.getElementById("set-my-definition")
+let name = document.getElementById("name")
+let meaning = document.getElementById("meaning")
+let example = document.getElementById("example")
+let chooseWord = document.getElementById("box-content")
+let container = document.getElementById("container")
+let audio = document.getElementById("audio-btn")
 // logout 
 
-getSignOut.addEventListener('click', () => { 
+getSignOut.addEventListener('click', () => {
     console.log(serverData)
     serverData.accountData = null;
     serverData.accountName = null;
@@ -132,7 +145,7 @@ getSignOut.addEventListener('click', () => {
 
 })
 //let signin
-getLogin.addEventListener('click', (e) => { 
+getLogin.addEventListener('click', (e) => {
     getLoginFormDiv.style.display = "block";
     
 })
@@ -157,7 +170,6 @@ getLoginForm.addEventListener("submit", (e) => {
                 if (serverData.accountData) {
                     setUserName.innerText = `Welcome ${serverData.accountData.name}`;
                 }
-
             }, 250)
             setTimeout(() => {
                 getLoginFormDiv.style.display = 'none'
@@ -190,19 +202,19 @@ getSignUporm.addEventListener('submit', (e) => {
     let confirmuserPassword = getSignUporm[2].value;
     // console.log(userAccountName, userPassword, confirmuserPassword)
     serverData.doesAccountExsist(userAccountName)
-    
+
     setTimeout(() => {
         let validAccount = serverData.isLogedIn
         if (validAccount === 'invalid Username') {
             if (userPassword !== confirmuserPassword) {
-                signUpAllet.innerText = "Password does not match"
-            } else { 
+                signUpAllet.innerText = "Pssword does not match"
+            } else {
                 serverData.creatAccount(userAccountName, userPassword)
                 signUpAllet.innerText = "Account created"
                 getSignUp.style.display = "none"
                 getLogin.style.display = 'none'
                 getSignOut.style.display = "block"
-                setTimeout(() => { 
+                setTimeout(() => {
                     setUserName.innerText = `Welcome ${serverData.accountData.name}`;
                     setTimeout(() => {
                         getSignUpFormDiv.style.display = 'none'
@@ -211,7 +223,7 @@ getSignUporm.addEventListener('submit', (e) => {
 
                     }, 250)
                 }, 2000)
-                
+
             }
         } else {
             signUpAllet.innerText = "Username has been taken"
@@ -223,24 +235,60 @@ getSignUporm.addEventListener('submit', (e) => {
         }
     }, 5000)
 })
+backToMyWords.addEventListener('click', () => {
+    getWordDefinition.style.display = "none"
+    wordContainer.style.display = 'block'
+})
 
+getSaveWordButton.addEventListener('click', () => {
+    console.log(name.innerText, meaning.innerText,setMyDefinitionBox.value)
+
+    serverData.addNewWord(name.innerText, meaning.innerText,setMyDefinitionBox.value)
+})
+// geting my words
+getMyWwordsbutton.addEventListener('click', () => {
+    backgroundBox.style.display = "block";
+    getMyWordBackground.style.display = "block";
+    getWordHolders.style.display = "block";
+    getMyWord.style.display = "block";
+    discription.style.display = "none";
+    wordContainer.innerHTML = "";
+    for (let i = 0; i < serverData.accountData.lookedupwords.length; i++) {
+        let wordButton = document.createElement('button')
+        wordButton.innerText = serverData.accountData.lookedupwords[i].word;
+        wordButton.style.borderRadius = "10px";
+        wordButton.style.margin = "10px";
+        wordButton.style.fontSize = "20px"
+        wordButton.addEventListener('click', () => {
+
+            console.log(serverData.accountData)
+            getWordDefinition.style.display = "block";
+            wordContainer.style.display = "none";
+            savedDefinition.innerText = serverData.accountData.lookedupwords[i].definition;
+            yourDefinition.innerText = serverData.accountData.lookedupwords[i].yourDefinition;
+            myword.innerText = serverData.accountData.lookedupwords[i].word;
+        })
+        wordContainer.append(wordButton);
+    }
+})
+exitWords.addEventListener('click', () => {
+    backgroundBox.style.display = "none";
+    getMyWordBackground.style.display = "none";
+    getWordHolders.style.display = "none";
+    getMyWord.style.display = "none";
+})
 
 // gets the canvas element
 const canvasHere = document.querySelector('canvas');
-let discription = document.getElementById("discription")
-let name = document.getElementById("name")
-let meaning = document.getElementById("meaning")
-let example = document.getElementById("example")
-let chooseWord = document.getElementById("box-content")
-let container = document.getElementById("container")
-let audio = document.getElementById("audio-btn")
+
+
 
 // canvasHere.style.background = "red"
 
 
 // gets the width and height of browser viewport
-const width = window.innerWidth-20;
-const height = window.innerHeight-20;
+const width = window.innerWidth - 20;
+const height = window.innerHeight - 20;
 
 //   set the width and height of canvas equal to browser viewport
 canvasHere.width = width;
@@ -252,7 +300,7 @@ const ctx = canvasHere.getContext('2d');
 // let elemTop = ctx.offsetTop + ctx.clientTop;
 // create Ball class
 class Ball {
-    constructor(x, y, velx, vely, size, color,textTOadd ,id,savedDefinition, savedPronounciation) {
+    constructor(x, y, velx, vely, size, color, textTOadd, id, savedDefinition, savedPronounciation) {
         this.x = x; // horizontal position of the ball
         this.y = y; // vertical position of the ball
         this.velx = velx; // velocity x added to coordinate x when we animate our ball
@@ -280,7 +328,7 @@ class Ball {
         ctx.shadowOffsetX = 1;
         ctx.shadowOffsetY = 1;
 
-        ctx.strokeText(this.textTOadd, this.x - (this.size-5), this.y+5)
+        ctx.strokeText(this.textTOadd, this.x - (this.size - 5), this.y + 5)
     }
 
     // create update func
@@ -313,25 +361,25 @@ function random(min, max) {
 //   create some balls and store in an array
 const balls = [];
 let ballnumber = 0;
-for (let i = 0; i < 25;i++){
-    let word;
+for (let i = 0; i < 25; i++) {
+    let wordh;
     // api here
     fetch("https://random-words-with-pronunciation.p.rapidapi.com/word?rapidapi-key=d90feb3493msh188349b87904e98p1e8634jsne0ad3411d51a").then(res => res.json()).then(data => {
         // console.log(data)
-        word = data[0].word
+        wordh = data[0].word
 
         let size = 0;
-        
+
         setTimeout(() => {
             //console.log(word)
-            for (let i = 0; i < word.length; i++) {
+            for (let i = 0; i < wordh.length; i++) {
                 if (i < 4) {
                     size += 7.75
                 } else {
                     size += 5.5
                 }
             }
-            let xspeed = random(-2,2);
+            let xspeed = random(-2, 2);
             let yspeed = random(-2, 2);
 
             while (xspeed === 0) {
@@ -349,10 +397,10 @@ for (let i = 0; i < 25;i++){
                 // 0,0,
                 size,
                 `rgb(${random(100, 255)}, ${random(100, 255)}, ${random(100, 255)})`,
-                word,
+                wordh,
                 ballnumber,
-                 data[0].definition,
-                 data[0].pronunciation
+                data[0].definition,
+                data[0].pronunciation
             );
             balls.push(ball);
             ballnumber++
@@ -382,29 +430,33 @@ function loop() {
 // finaly call the loop func once ot start
 loop();
 canvasHere.addEventListener('click', function (event) {
-    let x = event.layerX ;
-    let y = event.layerY -28;
+    let x = event.layerX;
+    let y = event.layerY -87;
     // console.log(event)
     // Collision detection between clicked offset and element.
     let wordToSearch;
-    balls.forEach( (element)=> {
+    balls.forEach((element) => {
         element.fillStyle = 'blue';
-        
+
         if (x > (element.x - 68) && x < (element.x + 68) && y > (element.y - 68) && y < (element.y + 68)) {
+            console.log(x, y)
+            console.log(element.x, element.y)
             // word
             console.log(element.textTOadd)
             // fetch(`https://wordsapiv1.p.rapidapi.com/words/${element.textTOadd}/?rapidapi-key=a814b05c93msh2cd39afebec73fap1d509cjsnb19622b7a4fa`)
             //       .then(res => res.json()).then(data2 => {
             //         console.log(data2)
-          
-                
-                    
-                        name.innerText = `Word: ${element.textTOadd}`
-                        meaning.innerText = `Meaning: ${element.savedDefinition} `
-                        example.innerText = `Pronunciation: ${element.savedPronounciation}`
-                        audio.innerText = "Audio"
-                        audio.style.display = "block"
-                        discription.style.cssText = `backdrop-filter: blur(16px);
+
+
+
+            name.innerText = `Word: ${element.textTOadd}`
+            meaning.innerText = `Meaning: ${element.savedDefinition} `
+            example.innerText = `Pronunciation: ${element.savedPronounciation}`
+            audio.innerText = "Audio"
+            audio.style.display = "block"
+            setMyDefinitionBox.style.display = "block"
+            getSaveWordButton.style.display = "block"
+            discription.style.cssText = `backdrop-filter: blur(16px);
                         background-color: rgba(17,25,40,0.75);
                         border-radius: 12px;
                         border: 1px solid rgba(255,255,255,0.125);
@@ -418,44 +470,34 @@ canvasHere.addEventListener('click', function (event) {
                         -webkit-backdrop-filter: blur(16px);
                         `
 
-                        container.style.display = "none";
-
-                      
-                        audio.addEventListener("click", () => {
-                            
-                            let speaks = [
-                                {
-                                  "name": "Alex",
-                                  "lang": "en-US"
-                                }
-                            ]
-                         const msg = new SpeechSynthesisUtterance();
-                            msg.volume = 1; 
-                            msg.rate = 1; 
-                            msg.pitch = 1.5; 
-                            msg.text  = `${element.textTOadd}` ;
-                        speechSynthesis.speak(msg);
-                        toggle()
-                       
-                        function toggle() {
-                            speechSynthesis.cancel()
-                            speechSynthesis.speak(msg);
-                        }
-                        })
-                        
-
-                    
-             
+            container.style.display = "none";
 
 
+            audio.addEventListener("click", () => {
 
+                let speaks = [
+                    {
+                        "name": "Alex",
+                        "lang": "en-US"
+                    }
+                ]
+                const msg = new SpeechSynthesisUtterance();
+                msg.volume = 1;
+                msg.rate = 1;
+                msg.pitch = 1.5;
+                msg.text = `${element.textTOadd}`;
+                speechSynthesis.speak(msg);
+                toggle()
 
-
-                 
-            }
+                function toggle() {
+                    speechSynthesis.cancel()
+                    speechSynthesis.speak(msg);
+                }
+            })
+        }
     })
 
-    
+
     balls[0].textTOadd = "noijo"
     //console.log(balls[0],x,y,balls[0].size)
 

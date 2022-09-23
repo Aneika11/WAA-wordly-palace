@@ -1,15 +1,15 @@
-body{
+body {
     margin: 0px;
-    padding:0px;
+    padding: 0px;
     font-family: Georgia, serif;
     background-color: black;
 
 }
 
-#arrayOfWords{
+#arrayOfWords {
     display: grid;
     justify-content: center;
-    grid-template-columns: repeat(4,auto);
+    grid-template-columns: repeat(4, auto);
     /* margin-top: 100px; */
     background-color: white #D5B87C;
     grid-gap: 70px;
@@ -17,7 +17,7 @@ body{
 }
 
 
-#container{
+#container {
 
 
     background-color: white;
@@ -35,16 +35,16 @@ body{
     top: 88px;
     bottom: 0;
     border-radius: 8px;
-    -webkit-box-shadow: 20px 20px 22px rgba(0,0,0,0.2);
-    box-shadow: 20px 20px 22px rgba(0,0,0,0.2);
-    font-family: 'Poppins',sans-serif;
-    
+    -webkit-box-shadow: 20px 20px 22px rgba(0, 0, 0, 0.2);
+    box-shadow: 20px 20px 22px rgba(0, 0, 0, 0.2);
+    font-family: 'Poppins', sans-serif;
+
 }
 
-#box-content{
+#box-content {
     color: white;
     font-size: xx-large;
-    position:absolute;
+    position: absolute;
     left: 0;
     right: 0;
     top: 0;
@@ -52,7 +52,7 @@ body{
     z-index: 10;
 }
 
-#background{
+#background {
     max-width: 700px;
     margin: auto;
     text-align: center;
@@ -64,20 +64,22 @@ body{
 }
 
 
-@keyframes backgroundChange{
-    from{
+@keyframes backgroundChange {
+    from {
         background-image: linear-gradient(to bottom right, red, yellow);
     }
-    to{
+
+    to {
         background-image: linear-gradient(to bottom right, orange, green);
     }
 }
-#ex-holder{
-   display: inline-flex; 
+
+#ex-holder {
+    display: inline-flex;
 
 }
 
-#audio-btn{
+#audio-btn {
     width: 60px;
     height: 20px;
     margin-top: 40px;
@@ -86,23 +88,28 @@ body{
 
 }
 
+
 #nav{
     /* background-color: rgb(157, 205, 177); */
-    background-color: #A87CD0; 
+    background-color: #A87CD0;
     padding: 10px;
     display: flex;
     justify-content: space-between;
 }
-#account-log{
+
+#account-log {
     display: flex;
-    
+
 }
-#account-log p{
+
+#account-log p {
     margin: 20px 10px;
 }
-#SignOut{
+
+#SignOut {
     display: none;
 }
+
 #blur-background{
     padding: 10px;
     width:100%;
@@ -124,23 +131,35 @@ body{
     position:absolute;
     left: calc(50% - 100px);
     backdrop-filter: blur(16px);
+    background-color: rgba(17, 25, 40, 0.75);
+    border-radius: 12px;
+    border: 1px solid rgba(255, 255, 255, 0.125);
+    font-family: 'Archivo', sans-serif;
+    font-size: 30px;
+    -webkit-backdrop-filter: blur(16px);
+}
+
+#sign-in-form-div {
+    padding: 10px;
+    width: 300px;
+    position: absolute;
+    left: calc(50% - 200px);
+
+    color: white;
+
+
+    /* backdrop-filter: blur(16px);
     background-color: rgba(17,25,40,0.75);
     border-radius: 12px;
     border: 1px solid rgba(255,255,255,0.125);           
+    font-family: 'Aref Ruqaa Ink', serif;
     font-family:'Archivo',sans-serif;
-    left: calc(50% - 200px);
-    font-size: 30px;       
-    -webkit-backdrop-filter: blur(16px);   
-}
-
-#sign-in-form-div{
-    padding: 10px;
-    width:300px;
-    position:absolute;
-    left: calc(50% - 200px);
-    color:white;
-    margin-top: 70px;
-    display: block;
+           
+    /* left: calc(50% - 350px); */
+    /* font-size: 30px; */
+    /*                        
+    -webkit-backdrop-filter: blur(16px); */
+    display: none;
     z-index: 400;
 }
 .signUp{
@@ -173,20 +192,21 @@ body{
     margin-top: 70px;
 }
 
-#signUpAllet{
-    color:red;
+#signUpAllet {
+    color: red;
 }
 
-   
 
-#sign-up-form-holder{
+
+#sign-up-form-holder {
     z-index: 20;
 }
-.login-form{
+
+.login-form {
     margin: 20px;
-    width:200px;
-    left:0;
-    padding:3px;
+    width: 200px;
+    left: 0;
+    padding: 3px;
     -webkit-backdrop-filter: blur(16px);
    backdrop-filter: blur(16px);
    background-color: rgba(120, 123, 128, 0.75);
@@ -209,26 +229,29 @@ body{
 #login{
     margin-left:25px;
     margin-top: 20px;
-    width:210px;
+    width: 210px;
     -webkit-backdrop-filter: blur(16px);
-   backdrop-filter: blur(16px);
-   background-color: rgba(145, 149, 156, 0.75);
-   color:white; 
-   padding: 5px 0;
-  
+    backdrop-filter: blur(16px);
+    background-color: rgba(145, 149, 156, 0.75);
+    color: white;
+    padding: 5px 0;
+
 }
 
-#discription{
+#discription {
     position: absolute;
 }
-#my-words-main{
+
+#my-words-main {
     display: none;
     height: 100%;
     width: 100%;
     position: absolute;
-    top:90px;
+    top: 90px;
+    pointer-events: none;
 }
-#my-words-background{
+
+#my-words-background {
     background-color: rgba(85, 87, 92, 0.75);
     height: calc(100% - 100px);
     width: calc(100% - 100px);
@@ -239,50 +262,100 @@ body{
     backdrop-filter: blur(20px);
     border-radius: 100px;
 }
+
 #my-words-holder {
     display: none;
-    pointer-events: none;
     position: absolute;
     height: calc(100% - 100px);
     width: 100%;
-    z-index: 300;
-    display: flex;
-    justify-content: center;
-    align-items: center;
+    z-index: 200;
 }
+
 div#my-words-here {
     border-radius: 100px;
-    width: calc(100% - 700px);
-    height: calc(100% - 100px);
+    width: 60%;
+    height: calc(100% - 120px);
     overflow-x: hidden;
     overflow-y: auto;
     padding: 20px;
     margin: 20px auto 0;
-    z-index: 320;
     overflow-y: scroll;
+    position: absolute;
+    margin-left: 15%;
+    margin-top: 50px;
 }
-#my-words-here-background{
+
+#my-words-here-background {
+    z-index: 300;
     display: none;
     border-radius: 100px;
-    position: absolute;
-    top:40px;
     background-color: rgba(114, 152, 199, 0.63);
-    width: 900px;
+    width: 70%;
     height: calc(100% - 100px);
     padding: 20px;
-    
+    position: absolute;
+    top: 40px;
+    margin-left: 15%;
 }
+
 #my-words-here {
+    z-index: 310;
     display: none;
     -ms-overflow-style: none;
     /* IE and Edge */
     scrollbar-width: none;
     /* Firefox */
 }
+
 #my-words-here::-webkit-scrollbar {
     display: none;
 }
-#get-my-words{
+
+/* #get-my-words{
+    display: none;
+} */
+
+#background-for-login {
+    display: none;
+}
+
+#word-container {
+    padding: 0 30px;
+}
+
+#exit-words {
+    position: absolute;
+    right: 80px;
+    top: 10px;
+    color: white;
+}
+
+#get-word-definition {
+    display: none;
+}
+
+#back-to-my-words {
+    position: absolute;
+    left: 50px;
+    top: 10px;
+    border-radius: 20px;
+}
+
+#save-my-word {
+    position: absolute;
+    right: 20px;
+    bottom: 10px;
+    border-radius: 20px;
+    background-color: gray;
+    color: rgb(226, 220, 220);
+    border-color: rgb(255, 255, 255);
+    display: none;
+}
+#optional{
+    margin: 0px;
+    font-size: 15px;
+}
+#set-my-definition{
     display: none;
 }
 

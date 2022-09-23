@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
@@ -8,8 +9,11 @@
     <link rel="stylesheet" href="style.css">
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Aref+Ruqaa+Ink&family=Source+Sans+Pro:ital,wght@1,900&display=swap" rel="stylesheet">
+    <link
+        href="https://fonts.googleapis.com/css2?family=Aref+Ruqaa+Ink&family=Source+Sans+Pro:ital,wght@1,900&display=swap"
+        rel="stylesheet">
 </head>
+
 <body>
     <nav id="nav">
         <h1>WAA</h1>
@@ -19,10 +23,10 @@
             <p id="Login">Login</p>
             <p id="SignUp">SignUp</p>
             <p id="SignOut">SignOut</p>
-            
+
         </div>
     </nav>
-  
+
     <div id="container">
         <div id="background"> </div>
         <div id="box-content">꧁༒☬𝓒𝓗𝓞𝓞𝓢𝓔 𝓨𝓞𝓤𝓡 𝓒𝓘𝓡𝓒𝓛𝓔☬༒꧂</div>
@@ -30,9 +34,15 @@
     <div id="discription">
         <div id="name"></div>
         <div id="meaning"></div>
-        <div id="ex-holder"> <p id="example"></p> <button id="audio-btn"></button> </div>
+        <div id="ex-holder">
+            <p id="example"></p> <button id="audio-btn"></button>
+        </div>
+        <p id="optional">optional: save your own definition</p>
+        <!-- <input id="set-my-definition" type="text" placeholder="save your own definition"> -->
+        <textarea id="set-my-definition" rows="4" cols="50" >
+        </textarea>
+        <button id="save-my-word">Save Word</button>
     </div>
-
    <div id="sign-up-container">
     <div id="blur-background"></div>
     <div id="background-for-login"></div>
@@ -71,48 +81,51 @@
                 <br>
                 <button class="signUp">Sign Up</button>
             </form>
-         </div>
-       </div>
-   </div>
+        </div>
+        <!-- confirm -->
+        <div id="sign-up-form-div">
+            <div id="sign-up-form-holder">
+                <p id="signup-allert"> </p>
+                <form id="sign-up-form">
+                    <label for="fname">User name:</label>
+                    <input type="text" name="fname" class="geting-user-data">
+                    <br>
+                    <label for="userpassword">password:</label>
+                    <input type="password" name="userpassword" class="geting-user-data">
+                    <br>
+                    <label for="confirmuserpassword">confirm password:</label>
+                    <input type="password" name="confirmuserpassword" class="geting-user-data">
+                    <input type="submit">
+                    <br>
+                </form>
+            </div>
+        </div>
+    </div>
 
-   
+
     <div id="my-words-main">
         <div id="my-words-background"></div>
     </div>
     <div id="my-words-holder">
-        <div id="my-words-here-background"></div>
-        <div id="my-words-here">
-            <p>hi there</p>
-            <p>hi there</p>
-            <p>hi there</p>
-            <p>hi there</p>
-            <p>hi there</p>
-            <p>hi there</p>
-            <p>hi there</p>
-            <p>hi there</p>
-            <p>hi there</p>
-            <p>hi there</p>
-            <p>hi there</p>
-            <p>hi there</p>
-            <p>hi there</p>
-            <p>hi there</p>
-            <p>hi there</p>
-            <p>hi there</p>
-            <p>hi there</p>
-            <p>hi there</p>
-            <p>hi there</p>
-            <p>hi there</p>
-            <p>hi there</p>
-            <p>hi there</p>
-            <p>hi there</p>
-            <p>hi there</p>
-            <p>hi there</p>
-            <p>hi there</p>
-            <p>hi there</p>
-            <p>hi there</p>
-            <p>hi there</p>
-            <p>hi there</p>
+        <div id="my-words-here-background">
+            <p id="exit-words">X</p>
         </div>
+
+        <div id="my-words-here">
+            <div id="word-container">
+
+            </div>
+            <div id="get-word-definition">
+                <button id="back-to-my-words"><span>&#60;&#x3D;</span> back</button>
+                <h1 id="my-word" >words: </h1>
+                <p id="saved-definition">
+                </p>
+                <p>Your Definition: 
+                <span id="your-definition"></span>
+                </p>
+            </div>
+        </div>
+
     </div>
 
     <!-- <div id="arrayOfWords"></div> -->
@@ -121,4 +134,5 @@
     <!-- <script src="script.js"></script> -->
     <script type="module" src="ball.js"></script>
 </body>
+
 </html>
