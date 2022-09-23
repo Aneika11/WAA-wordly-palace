@@ -130,6 +130,11 @@ let audio = document.getElementById("audio-btn")
 
 getSignOut.addEventListener('click', () => {
     console.log(serverData)
+
+    getMyWwordsbutton.style.display = "none"
+    getWordHolders.style.display = "none"
+    getMyWordBackground.style.display = "none"
+    document.getElementById("my-words-background").style.display = "none"
     serverData.accountData = null;
     serverData.accountName = null;
     serverData.isLogedIn = false;
@@ -248,7 +253,6 @@ backToMyWords.addEventListener('click', () => {
 
 getSaveWordButton.addEventListener('click', () => {
     console.log(name.innerText, meaning.innerText,setMyDefinitionBox.value)
-
     serverData.addNewWord(name.innerText, meaning.innerText,setMyDefinitionBox.value)
 })
 // geting my words
@@ -259,6 +263,7 @@ getMyWwordsbutton.addEventListener('click', () => {
     getMyWord.style.display = "block";
     discription.style.display = "none";
     wordContainer.innerHTML = "";
+    document.getElementById("my-words-background").style.display = "block"
     for (let i = 0; i < serverData.accountData.lookedupwords.length; i++) {
         let wordButton = document.createElement('button')
         wordButton.innerText = serverData.accountData.lookedupwords[i].word;
