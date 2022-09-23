@@ -210,7 +210,8 @@ getSignUporm.addEventListener('submit', (e) => {
 
     setTimeout(() => {
         let validAccount = serverData.isLogedIn
-        if (validAccount === 'invalid Username') {
+        console.log(validAccount)
+        if (validAccount === 'invaled Username') {
             if (userPassword !== confirmuserPassword) {
                 signUpAllet.innerText = "Pssword does not match"
             } else {
