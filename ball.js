@@ -19,91 +19,71 @@ let serverData = {
     isLogedIn: false,
     accountData: null,
     accountReference: null,
-    accountName: null,
     doesAccountExsist(userName, getpassword) {
         this.accountReference = ref(db, `accounts/${userName}`);
         onValue(this.accountReference, (snap) => {
-            //console.log(snap.val())
             if (snap.val()) {
-                if (getpassword === snap.val().password) {
-                    this.isLogedIn = true
-                } else {
-                    this.isLogedIn = 'wrong password';
-                }
+                this.isLogedIn = getpassword === snap.val().password ? true : 'wrong password';
             } else {
                 this.isLogedIn = 'invaled Username';
             }
         });
-        //console.log(returnThisAccount)
     },
     getAccountData() {
-        onValue(this.accountReference, (snap) => {
-            this.accountData = snap.val()
-            this.accountName = snap.val().name
-        });
+        onValue(this.accountReference, (snap) => this.accountData = snap.val() );
         this.isLogedIn = true;
-        //console.log(this.accountData);
-        localStorage.setItem("username", this.accountData.name);
         return 'successfully logged in'
     },
     creatAccount(userName, password) {
         this.accountReference = ref(db, `accounts/${userName}`);
-        onValue(this.accountReference, (snap) => {
-            this.isLogedIn = true;
-            set(this.accountReference, {
-                password: password,
-                name: userName,
-                lookedupwords: [
-                    {
-                        word: "hi",
-                        definition: "saying hi",
-                        youdefinition:"having fun"
-                    }
-                ]
-            });
-            onValue(this.accountReference, (snap2) => {
-                this.accountData = snap2.val();
-                this.accountName = snap2.val().name;
-            })
-            //console.log('account was created', this.isLogedIn)
-            return true
+        this.isLogedIn = true;
+        set(this.accountReference, {
+            password: password,
+            name: userName,
+            lookedupwords: [
+                {
+                    word: "hi",
+                    definition: "saying hi",
+                    youdefinition: "having fun"
+                }
+            ],
+            allMyWords: ["hi"]
         });
-    },
-    signOutNow() {
-        this.isLogedIn = false;
-        this.accountData = null;
-        this.accountReference = null;
-        this.accountName = null;
+        onValue(this.accountReference, (snap) => {
+            this.accountData = snap.val();
+        })
     },
     addNewWord(wordToAdd, definition, yourDefinitionHere) {
-        //if (!this.accountData.lookedupwords.includes(wordToAdd)) {
-        this.accountData.lookedupwords.push({ word: wordToAdd, definition, yourDefinition: yourDefinitionHere })
-            // console.log()
+        if (!this.accountData.allMyWords.includes(wordToAdd)) {
+            let newword = { word: wordToAdd, definition, yourDefinition: yourDefinitionHere };
+            this.accountData.lookedupwords.push(newword)
+            this.accountData.allMyWords.push(wordToAdd)
             set(this.accountReference, {
                 password: this.accountData.password,
                 name: this.accountData.name,
-                lookedupwords: this.accountData.lookedupwords
+                lookedupwords: this.accountData.lookedupwords,
+                allMyWords: this.accountData.allMyWords
             })
-        //}
+        }
     },
 }
-
+// singin items
 let getLogin = document.getElementById("Login");
 let getLoginFormDiv = document.getElementById("sign-in-form-div")
 let getLoginForm = document.getElementById("sign-in-form")
 let loginAllet = document.getElementById("signin-allert")
-let blur = document.getElementById("blur-background")
 let loginBackground = document.getElementById("background-for-login")
 
-
+let blur = document.getElementById("blur-background")
+// SignUp items
 let getSignUp = document.getElementById("SignUp");
 let getSignUpFormDiv = document.getElementById("sign-up-form-div")
 let getSignUporm = document.getElementById("sign-up-form")
 let signUpAllet = document.getElementById("signup-allert")
 
 let getSignOut = document.getElementById("SignOut")
-let setUserName = document.getElementById("UserName");
 
+let setUserName = document.getElementById("UserName");
 let backgroundBox = document.getElementById("my-words-main")
 let getMyWwordsbutton = document.getElementById("get-my-words")
 let getWordHolders = document.getElementById("my-words-holder")
@@ -114,9 +94,8 @@ let exitWords = document.getElementById("exit-words");
 let wordContainer = document.getElementById("word-container")
 let getWordDefinition = document.getElementById("get-word-definition")
 let backToMyWords = document.getElementById("back-to-my-words")
-
 let getSaveWordButton = document.getElementById("save-my-word")
-let savedDefinition = document.getElementById("saved-definition")
+let savedDefinitionHere = document.getElementById("saved-definition")
 let yourDefinition = document.getElementById("your-definition")
 let myword = document.getElementById("my-word")
 let setMyDefinitionBox = document.getElementById("set-my-definition")
@@ -126,54 +105,55 @@ let example = document.getElementById("example")
 let chooseWord = document.getElementById("box-content")
 let container = document.getElementById("container")
 let audio = document.getElementById("audio-btn")
+
 // logout 
-
 getSignOut.addEventListener('click', () => {
-    console.log(serverData)
+    getMyWwordsbutton.style.display = "none";
+    getWordHolders.style.display = "none";
+    getMyWordBackground.style.display = "none";
+    getSignOut.style.display = "none";
+    document.getElementById("my-words-background").style.display = "none";
+    setUserName.innerText = '';
 
-    getMyWwordsbutton.style.display = "none"
-    getWordHolders.style.display = "none"
-    getMyWordBackground.style.display = "none"
-    document.getElementById("my-words-background").style.display = "none"
+    blur.style.display = "block";
+    loginBackground.style.display = "block";
+    getLoginFormDiv.style.display = "block";
+    getSignUp.style.display = "block";
+    getLogin.style.display = 'block';
+
     serverData.accountData = null;
-    serverData.accountName = null;
     serverData.isLogedIn = false;
     serverData.accountReference = null;
-    getSignUp.style.display = "block"
-    getLogin.style.display = 'block'
-    getSignOut.style.display = "none"
-    console.log(serverData)
-    setUserName.innerText = ''
-    blur.style.display = "block"
-    loginBackground.style.display = "block"
-    getLoginFormDiv.style.display = "block";
-
-
 })
+
 //let signin
 getLogin.addEventListener('click', (e) => {
     getLoginFormDiv.style.display = "block";
     getSignUpFormDiv.style.display = "none";
-    
 })
 
+// login
 getLoginForm.addEventListener("submit", (e) => {
     e.preventDefault()
     let userAccountName = getLoginForm[0].value;
     let userAccountPassword = getLoginForm[1].value;
     serverData.doesAccountExsist(userAccountName, userAccountPassword)
     setTimeout(() => {
-        let validAccount = serverData.isLogedIn
+        let validAccount = serverData.isLogedIn;
         if (validAccount === 'invaled Username') {
             loginAllet.innerText = "Invaled Username";
         } else if (validAccount === 'wrong password') {
             loginAllet.innerText = "Wrong password";
         } else {
+            serverData.getAccountData();
             loginAllet.innerText = 'logIn succesful';
             blur.style.display = "none";
             loginBackground.style.display = "none";
-            getMyWwordsbutton.style.display ="block";
-            serverData.getAccountData(userAccountName, userAccountPassword)
+            getMyWwordsbutton.style.display = "block";
+            loginAllet.innerText = '';
+            getSignUp.style.display = "none";
+            getLogin.style.display = 'none';
+            getSignOut.style.display = "block";
             setTimeout(() => {
                 if (serverData.accountData) {
                     setUserName.innerText = `Welcome ${serverData.accountData.name}`;
@@ -184,12 +164,6 @@ getLoginForm.addEventListener("submit", (e) => {
                 getLoginForm[0].value = "";
                 getLoginForm[1].value = ""
             }, 250)
-            loginAllet.innerText = '';
-            getSignUp.style.display = "none"
-            getLogin.style.display = 'none'
-            getMyWwordsbutton.style.display = "block"
-            getSignOut.style.display = "block"
-
         }
     }, 1000)
     setTimeout(() => {
@@ -202,7 +176,6 @@ getLoginForm.addEventListener("submit", (e) => {
 getSignUp.addEventListener('click', (e) => {
     getSignUpFormDiv.style.display = "block";
     getLoginFormDiv.style.display = "none"
-
 })
 
 getSignUporm.addEventListener('submit', (e) => {
@@ -210,21 +183,19 @@ getSignUporm.addEventListener('submit', (e) => {
     let userAccountName = getSignUporm[0].value;
     let userPassword = getSignUporm[1].value;
     let confirmuserPassword = getSignUporm[2].value;
-    // console.log(userAccountName, userPassword, confirmuserPassword)
     serverData.doesAccountExsist(userAccountName)
-
     setTimeout(() => {
-        let validAccount = serverData.isLogedIn
-        console.log(validAccount)
+        let validAccount = serverData.isLogedIn;
         if (validAccount === 'invaled Username') {
             if (userPassword !== confirmuserPassword) {
-                signUpAllet.innerText = "Pssword does not match"
+                signUpAllet.innerText = "Password does not match"
             } else {
                 serverData.creatAccount(userAccountName, userPassword)
                 signUpAllet.innerText = "Account created"
                 getSignUp.style.display = "none"
                 getLogin.style.display = 'none'
                 getSignOut.style.display = "block"
+                getMyWwordsbutton.style.display = "block"
                 setTimeout(() => {
                     setUserName.innerText = `Welcome ${serverData.accountData.name}`;
                     setTimeout(() => {
@@ -234,7 +205,6 @@ getSignUporm.addEventListener('submit', (e) => {
 
                     }, 250)
                 }, 2000)
-
             }
         } else {
             signUpAllet.innerText = "Username has been taken"
@@ -252,8 +222,8 @@ backToMyWords.addEventListener('click', () => {
 })
 
 getSaveWordButton.addEventListener('click', () => {
-    console.log(name.innerText, meaning.innerText,setMyDefinitionBox.value)
-    serverData.addNewWord(name.innerText, meaning.innerText,setMyDefinitionBox.value)
+    serverData.isLogedIn = true
+    serverData.addNewWord(name.innerText, meaning.innerText, setMyDefinitionBox.value)
 })
 // geting my words
 getMyWwordsbutton.addEventListener('click', () => {
@@ -275,7 +245,7 @@ getMyWwordsbutton.addEventListener('click', () => {
             console.log(serverData.accountData)
             getWordDefinition.style.display = "block";
             wordContainer.style.display = "none";
-            savedDefinition.innerText = serverData.accountData.lookedupwords[i].definition;
+            savedDefinitionHere.innerText = serverData.accountData.lookedupwords[i].definition;
             yourDefinition.innerText = serverData.accountData.lookedupwords[i].yourDefinition;
             myword.innerText = serverData.accountData.lookedupwords[i].word;
         })
@@ -405,7 +375,6 @@ for (let i = 0; i < 25; i++) {
                 random(size, height - size),
                 xspeed,
                 yspeed,
-                // 0,0,
                 size,
                 `rgb(${random(100, 255)}, ${random(100, 255)}, ${random(100, 255)})`,
                 wordh,
@@ -417,8 +386,6 @@ for (let i = 0; i < 25; i++) {
             ballnumber++
         }, 1000)
     })
-
-    //
 }
 
 //   create loop func
@@ -442,22 +409,14 @@ function loop() {
 loop();
 canvasHere.addEventListener('click', function (event) {
     let x = event.layerX;
-    let y = event.layerY -87;
-    // console.log(event)
+    let y = event.layerY - 87;
     // Collision detection between clicked offset and element.
     let wordToSearch;
     balls.forEach((element) => {
         element.fillStyle = 'blue';
 
         if (x > (element.x - 68) && x < (element.x + 68) && y > (element.y - 68) && y < (element.y + 68)) {
-            console.log(x, y)
-            console.log(element.x, element.y)
-            // word
-            console.log(element.textTOadd)
-            setMyDefinitionBox.value ="";
-
-
-
+            setMyDefinitionBox.value = "";
             name.innerText = `Word: ${element.textTOadd}`
             meaning.innerText = `Meaning: ${element.savedDefinition} `
             example.innerText = `Pronunciation: ${element.savedPronounciation}`
@@ -480,8 +439,6 @@ canvasHere.addEventListener('click', function (event) {
                         `
 
             container.style.display = "none";
-
-
             audio.addEventListener("click", () => {
 
                 let speaks = [
@@ -505,9 +462,6 @@ canvasHere.addEventListener('click', function (event) {
             })
         }
     })
-
-
     balls[0].textTOadd = "noijo"
-    //console.log(balls[0],x,y,balls[0].size)
 
 }, false);
