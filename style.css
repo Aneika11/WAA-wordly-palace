@@ -5,23 +5,35 @@ body {
     background-color: black;
 
 }
-
-#arrayOfWords {
-    display: grid;
-    justify-content: center;
-    grid-template-columns: repeat(4, auto);
-    /* margin-top: 100px; */
-    background-color: white #D5B87C;
-    grid-gap: 70px;
-    padding: 20px;
+/* nav elements */
+#nav {
+    background-color: rgba(168, 124, 208, 0.6);
+    padding: 10px;
+    display: flex;
+    justify-content: space-between;
+}
+#account-log {
+    display: flex;
 }
 
+#account-log p {
+    margin: 20px 10px;
+    cursor: pointer;
+}
 
+#user-name {
+    cursor: context-menu !important;
+}
+
+#sign-out {
+    display: none;
+}
+#get-my-words {
+    display: none;
+}
+
+/* first icon */
 #container {
-
-
-    background-color: white;
-
     max-width: 700px;
     margin: auto;
     text-align: center;
@@ -38,7 +50,25 @@ body {
     -webkit-box-shadow: 20px 20px 22px rgba(0, 0, 0, 0.2);
     box-shadow: 20px 20px 22px rgba(0, 0, 0, 0.2);
     font-family: 'Poppins', sans-serif;
+}
 
+#background {
+    max-width: 700px;
+    margin: auto;
+    text-align: center;
+    height: 80px;
+    opacity: .5;
+    background: linear-gradient(to bottom right, rgba(0, 212, 255, 0.9), rgba(0, 212, 255, 0.9), rgba(0, 212, 255, 0.9),
+            rgba(9, 9, 121, 0.7), rgba(9, 9, 121, 0.7), rgba(9, 9, 121, 0.7), rgba(0, 212, 255, 0.9), rgba(0, 212, 255, 0.9), rgba(0, 212, 255, 0.9));
+    backdrop-filter: blur(20px);
+    animation: backgroundChange 15s ease infinite;
+    background-size: 400% 400%;
+}
+
+@keyframes backgroundChange {
+    0% { background-position: 0% 50%;}
+    50% { background-position: 100% 50%;}
+    100% { background-position: 0% 50%;}
 }
 
 #box-content {
@@ -51,33 +81,25 @@ body {
     bottom: 0;
     z-index: 10;
 }
-
-#background {
-    max-width: 700px;
-    margin: auto;
-    text-align: center;
-    height: 80px;
-    opacity: .5;
-    background-image: linear-gradient(to bottom right,#00d4ff, #090979);
-    -webkit-backdrop-filter: blur(20px);
-    animation: backgroundChange 3s infinite;
-    animation-direction: alternate;
-}
-
-
-@keyframes backgroundChange {
-    from {
-        background-image: linear-gradient(to bottom right, #00d4ff, #090979);
-    }
-
-    to {
-        background-image: linear-gradient(to bottom right,#090979,#00d4ff  );
-    }
+ /* words holder */
+#discription {
+    width: 700px;
+    padding: 10px;
+    color: white;
+    font-family: 'Aref Ruqaa Ink', serif;
+    font-size: 30px;
+    border-radius: 12px;
+    position: absolute;
+    left: calc(50% - 350px);
+    backdrop-filter: blur(16px);
+    background-color: rgba(17, 25, 40, 0.75);
+    border: 1px solid rgba(255, 255, 255, 0.125);
+    -webkit-backdrop-filter: blur(16px);
+    display: none;
 }
 
 #ex-holder {
     display: inline-flex;
-
 }
 
 #audio-btn {
@@ -85,32 +107,22 @@ body {
     height: 20px;
     margin-top: 40px;
     margin-left: 50px;
-    display: none;
-
+}
+#optional {
+    margin: 0px;
+    font-size: 15px;
+}
+#save-my-word {
+    position: absolute;
+    right: 20px;
+    bottom: 10px;
+    border-radius: 20px;
+    background-color: gray;
+    color: rgb(226, 220, 220);
+    border-color: rgb(255, 255, 255);
 }
 
-
-#nav{
-    /* background-color: rgb(157, 205, 177); */
-    background-color: #A87CD0;
-    padding: 10px;
-    display: flex;
-    justify-content: space-between;
-}
-
-#account-log {
-    display: flex;
-
-}
-
-#account-log p {
-    margin: 20px 10px;
-}
-
-#SignOut {
-    display: none;
-}
-
+/* main blur background */
 #blur-background{
     width:100%;
     height: 800px;
@@ -126,106 +138,78 @@ body {
     padding: 10px;
     width:250px;
     height: 350px;
-    margin-top: 90px;
+    top: 180px;
     position:absolute;
-    left: calc(50% - 200px);
+    left: calc(50% - 125px);
     backdrop-filter: blur(16px);
     background-color: rgba(17, 25, 40, 0.75);
     border-radius: 12px;
     border: 1px solid rgba(255, 255, 255, 0.125);
-    font-family: 'Archivo', sans-serif;
-    font-size: 30px;
     -webkit-backdrop-filter: blur(16px);
 }
 
+/* sing in form */
 #sign-in-form-div {
+    font-family: 'Archivo', sans-serif;
+    font-size: 20px;
     padding: 10px;
-    width: 300px;
+    width: 250px;
     position: absolute;
-    left: calc(50% - 200px);
+    left: calc(50% - 125px);
+    top: 180px;
     color: white;
-    margin-top: 85px;
-
-
-    /* backdrop-filter: blur(16px);
-    background-color: rgba(17,25,40,0.75);
-    border-radius: 12px;
-    border: 1px solid rgba(255,255,255,0.125);           
-    font-family: 'Aref Ruqaa Ink', serif;
-    font-family:'Archivo',sans-serif;
-           
-    /* left: calc(50% - 350px); */
-    /* font-size: 30px; */
-    /*                        
-    -webkit-backdrop-filter: blur(16px); */
-  
     z-index: 400;
 }
-.signUp{
-    margin-left:25px;
-    margin-top: 20px;
-    width:210px;
-    -webkit-backdrop-filter: blur(16px);
-   backdrop-filter: blur(16px);
-   background-color: rgba(145, 149, 156, 0.75);
-   color:white; 
-   padding: 5px 0;
-  
+#sign-in-allert{
+    margin: 2px 20px;
+    font-size: 15px;
 }
-
-
-
-#sign-up-form-div{
-    /* width: 350px;
-    position: absolute;
-    left: calc(50% - 100px);
-    padding: 10px;  
-    display: none; */
+#sign-up-form-div {
+    font-family: 'Archivo', sans-serif;
+    font-size: 20px;
     padding: 10px;
-    width:350px;
-    position:absolute;
-    left: calc(50% - 200px);
+    width: 250px;
+    position: absolute;
+    left: calc(50% - 125px);
+    top: 180px;
     display: none;
     z-index: 400;
-    color:white;
-    margin-top: 70px;
+    color: white;
 }
 
-#signUpAllet {
-    color: red;
+#signup-allert {
+    color: rgb(244, 120, 120);
 }
-
-
-
-#sign-up-form-holder {
-    z-index: 20;
+/* sing in and sing up elements */
+.log-text {
+    margin-left: 20px;
 }
-
-.login-form {
+.log-form {
     margin: 20px;
     width: 200px;
     left: 0;
     padding: 3px;
     -webkit-backdrop-filter: blur(16px);
-   backdrop-filter: blur(16px);
-   background-color: rgba(120, 123, 128, 0.75);
-  
-}
-.input{
-   position: absolute;
-   margin-top: 20px; 
-   margin-left: 20px;
-   
-   
-}
-#login-text{
-    margin-left: 20px;
-}
-#sign-up-text{
-   margin-left: 40px;
+    backdrop-filter: blur(16px);
+    background-color: rgba(120, 123, 128, 0.75);
 }
 
-#login{
+.geting-user-data {
+    margin: 0 20px 30px;
+    padding: 20px;
+    width: 210px;
+    margin-right: 500px;
+    padding: 3px;
+    -webkit-backdrop-filter: blur(16px);
+    backdrop-filter: blur(16px);
+    background-color: rgba(120, 123, 128, 0.75);
+}
+
+.input{
+   margin: 20px 0 0 20px
+}
+
+.log-button{
     margin-left:25px;
     margin-top: 20px;
     width: 210px;
@@ -237,10 +221,7 @@ body {
 
 }
 
-#discription {
-    position: absolute;
-}
-
+/* display words */
 #my-words-main {
     display: none;
     height: 100%;
@@ -268,6 +249,31 @@ body {
     height: calc(100% - 100px);
     width: 100%;
     z-index: 200;
+    font-family: 'Archivo', sans-serif;
+}
+#my-words-here-background {
+    z-index: 300;
+    border-radius: 100px;
+    background-color: rgba(114, 152, 199, 0.63);
+    width: 70%;
+    height: calc(100% - 100px);
+    padding: 20px;
+    position: absolute;
+    top: 40px;
+    margin-left: 15%;
+}
+#exit-words {
+    position: absolute;
+    right: 80px;
+    top: 10px;
+    color: white;
+    cursor: pointer;
+}
+
+#my-words-here {
+    z-index: 310;
+    -ms-overflow-style: none;
+    scrollbar-width: none;
 }
 
 div#my-words-here {
@@ -284,52 +290,16 @@ div#my-words-here {
     margin-top: 50px;
 }
 
-#my-words-here-background {
-    z-index: 300;
-    display: none;
-    border-radius: 100px;
-    background-color: rgba(114, 152, 199, 0.63);
-    width: 70%;
-    height: calc(100% - 100px);
-    padding: 20px;
-    position: absolute;
-    top: 40px;
-    margin-left: 15%;
-}
-
-#my-words-here {
-    z-index: 310;
-    display: none;
-    -ms-overflow-style: none;
-    /* IE and Edge */
-    scrollbar-width: none;
-    /* Firefox */
-}
-
 #my-words-here::-webkit-scrollbar {
     display: none;
 }
 
-#get-my-words{
-    display: none;
-}
-
-
 #word-container {
     padding: 0 30px;
 }
-
-#exit-words {
-    position: absolute;
-    right: 80px;
-    top: 10px;
-    color: white;
-}
-
-#get-word-definition {
+#get-word-definition{
     display: none;
 }
-
 #back-to-my-words {
     position: absolute;
     left: 50px;
@@ -337,33 +307,4 @@ div#my-words-here {
     border-radius: 20px;
 }
 
-#save-my-word {
-    position: absolute;
-    right: 20px;
-    bottom: 10px;
-    border-radius: 20px;
-    background-color: gray;
-    color: rgb(226, 220, 220);
-    border-color: rgb(255, 255, 255);
-    display: none;
-}
-#optional{
-    margin: 0px;
-    font-size: 15px;
-}
-#set-my-definition{
-    display: none;
-}
-
-.geting-user-data{
-    margin: 20px;
-    padding: 20px;
-    width:210px;
-    margin-right: 500px;
-    padding:3px;
-    -webkit-backdrop-filter: blur(16px);
-   backdrop-filter: blur(16px);
-   background-color: rgba(120, 123, 128, 0.75);
-   
-}
 
