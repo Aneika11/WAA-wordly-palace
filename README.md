@@ -1,15 +1,16 @@
+# WAA-wordly-palace 
 
-#WAA-wordly-palace#
-
-###Team:###
+***Team:***
 
 * Product Manager/Developer: Aneika Nanton
-* Developer: Aldair Garcia
+* Developer: Aldair Garcia 
 
+  
+***Tech Stack:***
 
-Tech Stack:Frontend: HTML, CSS, Javascript
+* Frontend: HTML, CSS, Javascript, Firebase
 
-###Unit 6: Skills:###
+***Unit 6: Skills:***
 
 * API
 * fetchAPI
@@ -17,35 +18,59 @@ Tech Stack:Frontend: HTML, CSS, Javascript
 * Promises
 * webAPI
 
-###Product Vision:###
+___
+***Product Vision:***
+* WAA(words are awesome) is a web platform that allows users learn new uncommon words. This works by suggesting random daily words which are displayed in floating balls on the screen. When the words are clicked, the definition and pronunciation for that particular word is displayed. 
 
-* WAA(words are awesome) is a web platform that allows users learn new words. This works by suggesting random daily words which are displayed in floating balls on the screen.When the words are clicked, the definition and pronunciation for that particular word is displayed. The user can also translate the page to see what the same word would look like in different languages.
+___
+***MVP:***
 
-###MVP:###
+* Fetch data from [Random words API](https://random-words-with-pronunciation.p.rapidapi.com/word?rapidapi-key=d90feb3493msh188349b87904e98p1e8634jsne0ad3411d51a).
+* User is able to sign into their account or sign up for one.
+* User clicks on the circle of words that they want to learn.
+* User is presented with the name of the word, definition and audio of that word
+* Users can save their favorite words and also para-phrase the definitions of the word
+  
+___
 
-* Fetch data from Random Words API as well as a Dictionary API
-Broaden Vocabulary, Improvements in the sophistication of speech learn the recommended word
-Pop up that tells the history and interesting facts about the word suggested
+***Quick Demo:***
 
-###Demo###
-
-(https://user-images.githubusercontent.com/93327533/191820990-8cc49725-006c-403f-9e63-9dbc3fe040f5.gif)
-
-
-
-
+![](https://giphy.com/embed/ZiglSp1OWDvgjmT5Dn)
 
 
-###Contact:###
+___
 
-Developer: Aneika Nanton 
-LinkedIn: www.linkedin.com/in/aneika-nanton
-Github: https://github.com/Aneika11
+***Contact:***
+
+Product Manager/Developer: Aneika Nanton
+
+* [LinkedIn: Aneika Nanton](www.linkedin.com/in/aneika-nanton)
+* [Github: Aneika11](https://github.com/Aneika11)
+___
+
+***Contact:***
 
 Developer: Aldair Garcia
-LinkedIn: www.linkedin.com/in/aldair-garcia-angon/
-Github: https://github.com/AGarciaNY
+
+* [LinkedIn: Aldair Garcia]( www.linkedin.com/in/aldair-garcia-angon/)
+* [Github: AGarciaNY](https://github.com/AGarciaNY)
+  
+___
 
 
 
 Thank you 😀!
+
+
+
+
+
+
+
+
+
+
+
+
+
+
