@@ -250,9 +250,8 @@ getMyWordsbutton.addEventListener('click', () => {
         wordButton.style.borderRadius = "10px";
         wordButton.style.margin = "10px";
         wordButton.style.fontSize = "20px";
-        
+
         wordButton.addEventListener('click', () => {
-            console.log(serverData.accountData)
             getWordDefinition.style.display = "block";
             wordContainer.style.display = "none";
             savedDefinitionHere.innerText = serverData.accountData.lookedupwords[i].definition;
@@ -357,13 +356,11 @@ for (let i = 0; i < 20; i++) {
     let wordh;
     // api here
     fetch("https://random-words-with-pronunciation.p.rapidapi.com/word?rapidapi-key=d90feb3493msh188349b87904e98p1e8634jsne0ad3411d51a").then(res => res.json()).then(data => {
-        // console.log(data)
         wordh = data[0].word
 
         let size = 0;
 
         setTimeout(() => {
-            //console.log(word)
             for (let i = 0; i < wordh.length; i++) {
                 if (i < 4) {
                     size += 7.75
