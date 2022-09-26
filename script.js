@@ -19,18 +19,19 @@ let serverData = {
     isLogedIn: false,
     accountData: null,
     accountReference: null,
-    doesAccountExsist(userName, getpassword) {
+    wasWordAdded: false,
+    doesAccountExist(userName, getPassword) {
         this.accountReference = ref(db, `accounts/${userName}`);
         onValue(this.accountReference, (snap) => {
             if (snap.val()) {
-                this.isLogedIn = getpassword === snap.val().password ? true : 'wrong password';
+                this.isLogedIn = getPassword === snap.val().password ? true : 'wrong password';
             } else {
-                this.isLogedIn = 'invaled Username';
+                this.isLogedIn = 'invalid Username';
             }
         });
     },
     getAccountData() {
-        onValue(this.accountReference, (snap) => this.accountData = snap.val() );
+        onValue(this.accountReference, (snap) => this.accountData = snap.val());
         this.isLogedIn = true;
     },
     creatAccount(userName, password) {
@@ -52,20 +53,26 @@ let serverData = {
             this.accountData = snap.val();
         })
     },
+    checkIfWordWasAdded(wordToAdd) { 
+        if (this.accountData.allMyWords.includes(wordToAdd)) { 
+            this.wasWordAdded = true;
+        } else {
+            this.wasWordAdded = false;
+        }
+    }
+    ,
     addNewWord(wordToAdd, definition, yourDefinitionHere) {
-        if (!this.accountData.allMyWords.includes(wordToAdd)) {
             let newword = { word: wordToAdd, definition, yourDefinition: yourDefinitionHere };
-            this.accountData.lookedupwords.push(newword)
-            this.accountData.allMyWords.push(wordToAdd)
+            this.accountData.lookedupwords.push(newword);
+            this.accountData.allMyWords.push(wordToAdd);
             set(this.accountReference, {
                 password: this.accountData.password,
                 name: this.accountData.name,
                 lookedupwords: this.accountData.lookedupwords,
                 allMyWords: this.accountData.allMyWords
-            })
-        }
+            });
     },
-}
+};
 // nav elementes 
 let setUserName = document.getElementById("user-name");
 let getMyWordsbutton = document.getElementById("get-my-words");
@@ -76,6 +83,7 @@ let container = document.getElementById("container");
 
 // word discription
 let discription = document.getElementById("discription");
+let exitWordDiscription = document.getElementById("exit-word-discription")
 let name = document.getElementById("name");
 let meaning = document.getElementById("meaning");
 let example = document.getElementById("example");
@@ -85,31 +93,32 @@ let audio = document.getElementById("audio-btn");
 
 // Sing In items
 let getLogin = document.getElementById("login");
-let getLoginFormDiv = document.getElementById("sign-in-form-div")
-let getLoginForm = document.getElementById("sign-in-form")
-let loginAllet = document.getElementById("sign-in-allert")
+let getLoginFormDiv = document.getElementById("sign-in-form-div");
+let getLoginForm = document.getElementById("sign-in-form");
+let loginAllet = document.getElementById("sign-in-allert");
 
 // Sign Up items
 let getSignUp = document.getElementById("sign-up");
-let getSignUpFormDiv = document.getElementById("sign-up-form-div")
-let getSignUporm = document.getElementById("sign-up-form")
-let signUpAllet = document.getElementById("sign-up-allert")
+let getSignUpFormDiv = document.getElementById("sign-up-form-div");
+let getSignUporm = document.getElementById("sign-up-form");
+let signUpAllet = document.getElementById("sign-up-allert");
 
 // login and sign up back ground
-let loginBackground = document.getElementById("background-for-login")
-let blur = document.getElementById("blur-background")
-let backgroundBox = document.getElementById("my-words-main")
+let loginBackground = document.getElementById("background-for-login");
+let blur = document.getElementById("blur-background");
+let backgroundBox = document.getElementById("my-words-main");
 
 // saved words holder
-let getWordHolders = document.getElementById("my-words-holder")
+let getWordHolders = document.getElementById("my-words-holder");
 let exitWords = document.getElementById("exit-words");
-let wordContainer = document.getElementById("word-container")
-let getWordDefinition = document.getElementById("get-word-definition")
-let backToMyWords = document.getElementById("back-to-my-words")
-let myword = document.getElementById("my-word")
-let savedDefinitionHere = document.getElementById("saved-definition")
-let yourDefinition = document.getElementById("your-definition")
-
+let wordContainer = document.getElementById("word-container");
+let getWordDefinition = document.getElementById("get-word-definition");
+let backToMyWords = document.getElementById("back-to-my-words");
+let myword = document.getElementById("my-word");
+let savedDefinitionHere = document.getElementById("saved-definition");
+let yourDefinition = document.getElementById("your-definition");
+let wordWasSaved = document.getElementById("word-was-saved")
+let wordsWidth = document.getElementById("words-width")
 // logout 
 getSignOut.addEventListener('click', () => {
     // hide background elements
@@ -118,6 +127,7 @@ getSignOut.addEventListener('click', () => {
     getSignOut.style.display = "none";
     discription.style.display = "none";
     setUserName.innerText = '';
+    backgroundBox.style.display = "none";
 
     // show initial elements
     blur.style.display = "block";
@@ -130,7 +140,7 @@ getSignOut.addEventListener('click', () => {
     serverData.accountData = null;
     serverData.isLogedIn = false;
     serverData.accountReference = null;
-})
+});
 
 // get login form
 getLogin.addEventListener('click', (e) => {
@@ -141,7 +151,7 @@ getLogin.addEventListener('click', (e) => {
     getSignUporm[0].value = "";
     getSignUporm[1].value = "";
     getSignUporm[2].value = "";
-})
+});
 // get sign up form
 getSignUp.addEventListener('click', (e) => {
     getSignUpFormDiv.style.display = "block";
@@ -150,7 +160,7 @@ getSignUp.addEventListener('click', (e) => {
     loginAllet.innerText = "";
     getLoginForm[0].value = "";
     getLoginForm[1].value = "";
-})
+});
 
 // login form EventListener
 getLoginForm.addEventListener("submit", (e) => {
@@ -159,17 +169,17 @@ getLoginForm.addEventListener("submit", (e) => {
     let userAccountName = getLoginForm[0].value;
     let userAccountPassword = getLoginForm[1].value;
     // check if username exsist
-    serverData.doesAccountExsist(userAccountName, userAccountPassword);
+    serverData.doesAccountExist(userAccountName, userAccountPassword);
     // await results
     setTimeout(() => {
         let validAccount = serverData.isLogedIn;
-        if (validAccount === "invaled Username") {
-            loginAllet.innerText = "Invaled Username";
+        if (validAccount === "invalid Username") {
+            loginAllet.innerText = "invalid Username";
         } else if (validAccount === "wrong password") {
             loginAllet.innerText = "Wrong Password";
         } else {
             serverData.getAccountData();
-            loginAllet.innerText = "Login was succesful";
+            loginAllet.innerText = "Login was successful";
             // give time to user to see that they where loged in
             setTimeout(() => {
                 // remove in initial elements
@@ -202,11 +212,11 @@ getSignUporm.addEventListener('submit', (e) => {
     let userPassword = getSignUporm[1].value;
     let confirmuserPassword = getSignUporm[2].value;
     // check if username is taken
-    serverData.doesAccountExsist(userAccountName);
+    serverData.doesAccountExist(userAccountName);
     // await results
     setTimeout(() => {
         let validAccount = serverData.isLogedIn;
-        if (validAccount === 'invaled Username') {
+        if (validAccount === 'invalid Username') {
             if (userPassword !== confirmuserPassword) {
                 signUpAllet.innerText = "Password does not match";
             } else {
@@ -235,7 +245,7 @@ getSignUporm.addEventListener('submit', (e) => {
                 }, 5000);
             };
         } else {
-            signUpAllet.innerText = "Username has been taken"
+            signUpAllet.innerText = "Username has been taken";
         };
     }, 1000);
 });
@@ -247,8 +257,8 @@ getMyWordsbutton.addEventListener('click', () => {
     backgroundBox.style.display = "block";
     getWordHolders.style.display = "block";
     for (let i = 1; i < serverData.accountData.lookedupwords.length; i++) {
-        let wordButton = document.createElement('button')
-        wordButton.innerText = serverData.accountData.lookedupwords[i].word;
+        let wordButton = document.createElement('button');
+        wordButton.innerText = serverData.accountData.lookedupwords[i].word.slice(5, serverData.accountData.lookedupwords[i].word.length);
         wordButton.style.borderRadius = "10px";
         wordButton.style.margin = "10px";
         wordButton.style.fontSize = "20px";
@@ -259,25 +269,40 @@ getMyWordsbutton.addEventListener('click', () => {
             savedDefinitionHere.innerText = serverData.accountData.lookedupwords[i].definition;
             yourDefinition.innerText = serverData.accountData.lookedupwords[i].yourDefinition;
             myword.innerText = serverData.accountData.lookedupwords[i].word;
-        })
+        });
         wordContainer.append(wordButton);
-    }
-})
+    };
+});
+
 backToMyWords.addEventListener('click', () => {
-    getWordDefinition.style.display = "none"
-    wordContainer.style.display = 'block'
-})
+    getWordDefinition.style.display = "none";
+    wordContainer.style.display = 'block';
+});
 
 getSaveWordButton.addEventListener('click', () => {
-    serverData.isLogedIn = true
-    serverData.addNewWord(name.innerText, meaning.innerText, setMyDefinitionBox.value)
-})
+    serverData.isLogedIn = true;
+    serverData.addNewWord(name.innerText, meaning.innerText, setMyDefinitionBox.value);
+    serverData.checkIfWordWasAdded(name.innerText)
+    if (serverData.wasWordAdded) {
+        wordWasSaved.style.display = 'block';
+        setMyDefinitionBox.style.display = 'none';
+        getSaveWordButton.style.display = 'none';
+    } else {
+        wordWasSaved.style.display = 'none';
+        setMyDefinitionBox.style.display = 'block';
+        getSaveWordButton.style.display = 'block';
+    }
+});
 
 exitWords.addEventListener('click', () => {
     backgroundBox.style.display = "none";
     getWordHolders.style.display = "none";
-})
+});
 
+exitWordDiscription.addEventListener('click', () => {
+    discription.style.display = "none";
+    wordContainer.innerHTML = "";
+})
 // gets the canvas element
 const canvasHere = document.querySelector('canvas');
 
@@ -363,13 +388,9 @@ for (let i = 0; i < 20; i++) {
         let size = 0;
 
         setTimeout(() => {
-            for (let i = 0; i < wordh.length; i++) {
-                if (i < 4) {
-                    size += 7.75
-                } else {
-                    size += 5.5
-                }
-            }
+            wordsWidth.innerText = wordh;
+            wordsWidth.style.fontSize = '22.5px';
+            wordsWidth.style.fontStretch = "expanded";
             let xspeed = random(-0.5, 0.5);
             let yspeed = random(-0.5, 0.5);
 
@@ -385,7 +406,7 @@ for (let i = 0; i < 20; i++) {
                 random(size, height - size),
                 xspeed,
                 yspeed,
-                size,
+                wordsWidth.offsetWidth/2,
                 `rgb(${random(100, 255)}, ${random(100, 255)}, ${random(100, 255)})`,
                 wordh,
                 ballnumber,
@@ -395,9 +416,11 @@ for (let i = 0; i < 20; i++) {
             balls.push(ball);
             ballnumber++
         }, 1000)
-    })
+    }) 
 }
-
+setTimeout(() => {
+    wordsWidth.style.display = 'none';
+ },20000)
 //   create loop func
 function loop() {
     // cover the previous frame's drawing before the next one is drawn
@@ -433,6 +456,16 @@ canvasHere.addEventListener('click', function (event) {
             audio.innerText = "Audio";
             discription.style.display = "block";
             container.style.display = "none";
+            serverData.checkIfWordWasAdded(`Word: ${element.textTOadd}`);
+            if (serverData.wasWordAdded) {
+                wordWasSaved.style.display = 'block';
+                setMyDefinitionBox.style.display = 'none';
+                getSaveWordButton.style.display = 'none';
+            } else { 
+                wordWasSaved.style.display = 'none';
+                setMyDefinitionBox.style.display = 'block';
+                getSaveWordButton.style.display = 'block';
+            }
             audio.addEventListener("click", () => {
 
                 let speaks = [
@@ -456,6 +489,5 @@ canvasHere.addEventListener('click', function (event) {
             })
         }
     })
-    balls[0].textTOadd = "noijo"
 
 }, false);

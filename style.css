@@ -310,4 +310,20 @@ div#my-words-here {
     border-radius: 20px;
 }
 
-
+#words-width{
+    position: absolute;
+    opacity: 0.1;
+}
+#word-was-saved{
+    font-size: 20px;
+    color: rgb(80, 232, 80);
+}
+#exit-word-discription{
+    color:white;
+    position: absolute;
+    right:20px;
+    top: 0px;
+    margin: 0;;
+    font-size: 20px;
+    cursor: pointer;
+}
