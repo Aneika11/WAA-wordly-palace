@@ -1,19 +1,118 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Document</title>
     <link rel="stylesheet" href="style.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link
+        href="https://fonts.googleapis.com/css2?family=Aref+Ruqaa+Ink&family=Source+Sans+Pro:ital,wght@1,900&display=swap"
+        rel="stylesheet">
 </head>
+
 <body>
-    <h3>Choose your word!!</h3>
-    <div id="arrayOfWords"></div>
-   
+    <nav id="nav">
+        <h1>Wordly Palace</h1>
+        <div id="account-log">
+            <p id="user-name"></p>
+            <p id="get-my-words">Get your words</p>
+            <p id="login">Login</p>
+            <p id="sign-up">Sign Up</p>
+            <p id="sign-out">Sign Out</p>
+        </div>
+    </nav>
+    <button id="words-width"></button>
+    <div id="container">
+        <div id="background"> </div>
+        <div id="box-content">꧁༒☬𝓒𝓗𝓞𝓞𝓢𝓔 𝓨𝓞𝓤𝓡 𝓒𝓘𝓡𝓒𝓛𝓔☬༒꧂</div>
+    </div>
+
+    <div id="discription">
+        <p id="exit-word-discription">X</p>
+        <div id="name"></div>
+        <div id="meaning"></div>
+        <div id="ex-holder">
+            <p id="example"></p> <button id="audio-btn"></button>
+        </div>
+        <p id="optional">Optional: save your own definition</p>
+        <textarea id="set-my-definition" rows="4" cols="50">
+        </textarea>
+        <button id="save-my-word">Save Word</button>
+        <h1 id="word-was-saved">word was saved</h1>
+    </div>
+
+    <div id="blur-background"></div>
+    <div id="background-for-login"></div>
+
+    <!-- sing in form -->
+    <div id="sign-in-form-div">
+        <form id="sign-in-form">
+            <p class="log-text">Login to your account</p>
+            <p id="sign-in-allert"></p>
+
+            <label for="fname" class="input">Username</label>
+            <br>
+            <input type="text" name="fname" class="geting-user-data log-form">
+            <br>
+            <label for="userpassword" class="input">Password</label>
+            <br>
+            <input type="password" name="userpassword" class="geting-user-data log-form">
+            <br>
+            <button class="log-button">Login</button>
+            <br>
+        </form>
+    </div>
+    
+    <!-- sign up form -->
+    <div id="sign-up-form-div">
+        <form id="sign-up-form">
+            <p class="log-text">Create an account</p>
+            <p id="sign-up-allert"> </p>
+            <label for="fname" class="input">Username</label>
+            <input type="text" name="fname" class="geting-user-data log-form">
+            <br>
+            <label for="userpassword" class="input">Password</label>
+            <input type="password" name="userpassword" class="geting-user-data log-form">
+            <br>
+            <label for="confirmuserpassword" class="input">Confirm Password</label>
+            <input type="password" name="confirmuserpassword" class="geting-user-data log-form">
+            <input class="log-button" type="submit">
+            <br>
+        </form>
+    </div>
 
 
 
-<script src="script.js"></script>
+    <div id="my-words-main">
+        <div id="my-words-background"></div>
+    </div>
+
+    <div id="my-words-holder">
+        <div id="my-words-here-background">
+            <p id="exit-words">X</p>
+        </div>
+        <div id="my-words-here">
+            <div id="word-container">
+
+            </div>
+            <div id="get-word-definition">
+                <button id="back-to-my-words"><span>&#60;&#x3D;</span> back</button>
+                <h1 id="my-word">words: </h1>
+                <p id="saved-definition">
+                </p>
+                <p>Your Definition:
+                    <span id="your-definition"></span>
+                </p>
+            </div>
+        </div>
+    </div>
+
+    <canvas></canvas>
+    <script type="module" src="script.js"></script>
 </body>
+
 </html>

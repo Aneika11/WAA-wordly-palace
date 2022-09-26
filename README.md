@@ -1,30 +1,76 @@
-# README #
+# WAA-wordly-palace 
 
-Leap Bootstrap Theme by Medium Rare
+***Team:***
 
-### Where are the docs? ###
+* Product Manager/Developer: Aneika Nanton
+* Developer: Aldair Garcia 
 
-* Formal documentation is located at http://leap.mediumra.re/documentation/index.html - accessible from the **Documentation** link on most demo pages.
-* You can find lists of the styled components at pages/components-leap.html and pages/components-bootstrap.html
+  
+***Tech Stack:***
 
-### Getting Set Up (optional) ###
+* Frontend: HTML, CSS, Javascript, Firebase
 
-Setup instructions are located in the docs mentioned above.
+***Unit 6: Skills:***
 
-The short version:
+* API
+* fetchAPI
+* POST/GET
+* Promises
+* webAPI
 
-* npm install -g gulp-cli
-* npm install
-* gulp
+___
+***Product Vision:***
+* WAA(words are awesome) is a web platform that allows users learn new uncommon words. This works by suggesting random daily words which are displayed in floating balls on the screen. When the words are clicked, the definition and pronunciation for that particular word is displayed. 
 
-### Getting Support ###
+___
+***MVP:***
 
-Medium Rare provides support for bugfixes and guidance on using the theme.
+* Fetch data from [Random words API](https://random-words-with-pronunciation.p.rapidapi.com/word?rapidapi-key=d90feb3493msh188349b87904e98p1e8634jsne0ad3411d51a).
+* User is able to sign into their account or sign up for one.
+* User clicks on the circle of words that they want to learn.
+* User is presented with the name of the word, definition and audio of that word
+* Users can save their favorite words and also para-phrase the definitions of the word
+  
+___
 
-To access support, find the support link in your Bootstrap Marketplace dashboard.
+***Quick Demo:***
 
-### Giving Feedback ###
+![](https://giphy.com/embed/ZiglSp1OWDvgjmT5Dn)
 
-We strive to improve our products and we rely on feedback from our customers.
 
-Please feel free to share any feedback about Leap via twitter @mrareweb or feedback(at)mrare.co.
+___
+
+***Contact:***
+
+Product Manager/Developer: Aneika Nanton
+
+* [LinkedIn: Aneika Nanton](www.linkedin.com/in/aneika-nanton)
+* [Github: Aneika11](https://github.com/Aneika11)
+___
+
+***Contact:***
+
+Developer: Aldair Garcia
+
+* [LinkedIn: Aldair Garcia]( www.linkedin.com/in/aldair-garcia-angon/)
+* [Github: AGarciaNY](https://github.com/AGarciaNY)
+  
+___
+
+
+
+Thank you 😀!
+
+
+
+
+
+
+
+
+
+
+
+
+
+
