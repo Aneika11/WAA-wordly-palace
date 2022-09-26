@@ -164,6 +164,7 @@ body {
     margin: 2px 20px;
     font-size: 15px;
 }
+
 #sign-up-form-div {
     font-family: 'Archivo', sans-serif;
     font-size: 20px;
@@ -177,7 +178,9 @@ body {
     color: white;
 }
 
-#signup-allert {
+#sign-up-allert {
+    text-align: center;
+    margin: 0 5px;
     color: rgb(244, 120, 120);
 }
 /* sing in and sing up elements */

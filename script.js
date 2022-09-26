@@ -136,10 +136,11 @@ getSignOut.addEventListener('click', () => {
 getLogin.addEventListener('click', (e) => {
     getLoginFormDiv.style.display = "block";
     getSignUpFormDiv.style.display = "none";
+    signUpAllet.innerText = "";
     // clear sign up form
-    getSignUporm[0] = "";
-    getSignUporm[1] = "";
-    getSignUporm[2] = "";
+    getSignUporm[0].value = "";
+    getSignUporm[1].value = "";
+    getSignUporm[2].value = "";
 })
 // get sign up form
 getSignUp.addEventListener('click', (e) => {
@@ -218,11 +219,12 @@ getSignUporm.addEventListener('submit', (e) => {
                     getLogin.style.display = "none";
                     getSignUp.style.display = "none";
                     loginBackground.style.display = "none";
-                    getLoginFormDiv.style.display = "none";
+                    getSignUpFormDiv.style.display = "none";
+                    
                     // clear sign up form
-                    getSignUporm[0] = "";
-                    getSignUporm[1] = "";
-                    getSignUporm[2] = "";
+                    getSignUporm[0].value = "";
+                    getSignUporm[1].value = "";
+                    getSignUporm[2].value = "";
                     // display log in elements
                     getSignOut.style.display = "block";
                     getMyWordsbutton.style.display = "block";
